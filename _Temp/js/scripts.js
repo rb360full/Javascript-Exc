@@ -1,6 +1,8 @@
-let num = +prompt("Please Enter Your Number : ", 10);
-let allowAcces = (num > 10) ? "greater than 10" :
-    (num < 10) ? "less than 10" :
-        "equal 10";
-        
-console.log(allowAcces)
+var num1 = +prompt("Please Enter Number 1 : ")
+var num2 = +prompt("Please Enter Number 2 : ")
+var result = num1 * num2 == 12 ? 12 :
+    num1 * num2 == 6 ? 6 :
+        num1 * num2 == 4 ? 4 :
+            "OK"
+
+alert(result)
