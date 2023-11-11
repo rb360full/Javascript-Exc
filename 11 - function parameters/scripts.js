@@ -12,5 +12,11 @@ function OddEven(num) {
 }
 
 let num = +prompt("Enter a Number : ");
-let result = OddEven(num);
-alert(result);
+
+if (isNaN(num)) {
+    alert("Please Enter a Valid Number");
+}
+else {
+    let result = OddEven(num);
+    alert(num + " is " + result);
+}
