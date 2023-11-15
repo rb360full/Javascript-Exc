@@ -1,0 +1,1 @@
+console.log('reza'.length2 ); 
