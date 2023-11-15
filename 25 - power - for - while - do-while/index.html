@@ -16,35 +16,41 @@
     <h4 class="description text-center px-3 lh-lg">
         دو عدد از کاربر دریافت کرده و عدد اول را به توان عدد دوم برسانید
 
-        نکته: با حلقه انجام شود نه با عملگر توان
+        نکته: با هر سه حلقه انجام شود نه با عملگر توان
     </h4>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
-
+        // با حلقه while
         let num1 = +prompt("Enter number 1 : ", 2)
         let num2 = +prompt("Enter number 2 : ", 3)
         let i = 1
         let power = num1;
-        let power2 = 1;
         while (i < num2) {
             power *= num1
             i++
         }
-
+        // با حلقه do-while
         let j = 0
+        let power2 = 1;
         do {
             power2 *= num1
             j++
         } while (j < num2)
 
+        // با حلقه for
+        let power3 = num1;
+        for (i = 1; i < num2; i++) {
+            power3 *= num1
+        }
 
 
+        alert("result with \"While loop\" : " + power);
+        alert("result with \"do-While loop\" : " + power2);
+        alert("result with \"for loop\" : " + power3);
 
-        alert(power);
-        alert(power2);
 
 
 
