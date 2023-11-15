@@ -24,6 +24,14 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script>
 
+        let userProductsCount = +prompt("How many products you want to buy ?")
+        let totalAmount = null;
+        for (let i = 0; i < userProductsCount; i++) {
+            let productPrice = +prompt(`Enter product ${i + 1} price`)
+            totalAmount += productPrice
+        }
+
+        alert(totalAmount);
 
 
     </script>
