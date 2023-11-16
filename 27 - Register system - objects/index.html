@@ -14,28 +14,66 @@
 
     <h2 class="title text-center text-success my-5 mx-auto ">Exercise</h2>
     <h4 class="description text-center px-3 lh-lg">
-        اعدادی را به تعداد دلخواه از کاربر گرفته و داخل آرایه ای ذخیره کنید
-        و سپس میانگین آن ها را محاسبه کرده و نمایش دهید
+        تمرین :
+        یک سامانه ثبت نام پیاده سازی کنید
+
+        به این شکل که یک آرایه برای ذخیره اطلاعات کاربران داشته باشید (3 کاربر را بطور دیفالت در آرایه داشته باشید)
+        و از کاربری که قصد ثبت نام دارد نام، نام خانوادگی، سن و ایمیل را دریافت کرده
+        و داخل آبجکتی مجزا در آرایه کاربران ذخیره کنید
+        پس از انجام عمل ثبت نام، اطلالاعات تک تک کاربران را لاگ بگیرید
+
+        :نکات قابل توجه
+        نام حداقل باید 3 کاراکتر و حداکثر 10 کاراکتر داشته باشد
+        نام خانوادگی حداقل باید 3 کاراکتر و حداکثر باید 15 کاراکتر داشته باشد
+        سن حتما باید عدد بوده و حداکثر 3 رقم باشد
     </h4>
 
 
-    <script>
+    
 
-        let userCountNumber = +prompt("Enter Count Number : ")
-        let numbers = []
-        let sum = 0
-        for (i = 0; i < userCountNumber; i++) {
-            // numbers.push(+prompt("Enter number " + (i + 1) + " : "))
-            numbers[i]=+prompt("Enter number " + (i + 1) + " : ")
-            sum += numbers[i]
+
+    <script>
+        let users = []
+        users[0] = {
+            id: 1,
+            firstName: "amin",
+            lastName: "barzegar",
+            age: 25,
+            email: "amin@gmail.com"
         }
 
-        let average = sum / userCountNumber
-        console.log("The average of " + numbers + " is : " + average);
+        users[1] = {
+            id: 2,
+            firstName: "ali",
+            lastName: "ahmadi",
+            age: 34,
+            email: "ali@gmail.com"
+        }
+        users[2] = {
+            id: 3,
+            firstName: "mohsen",
+            lastName: "diris",
+            age: 46,
+            email: "mohsen@gmail.com"
+        }
+        let again = "y";
+        while (again != "n") {
 
-        
 
+            users.push({
+                id: users.length + 1,
+                firstName: prompt("enter your first name : ", "reza"),
+                lastName: prompt("enter your last name : ", "bazdaran"),
+                age: +prompt("enter your age : ", 40),
+                email: prompt("enter your email : ", "rbazdaran@gmail.com")
+            })
+            if (users[users.length - 1].firstName.length < 3) { users.pop(); alert("Your first name must be more than 2 character")  }
 
+            again = prompt("Again ? \n to cancel type : n \n to continue type : y ", "y")
+
+        }
+
+         console.log(users);
 
 
     </script>
