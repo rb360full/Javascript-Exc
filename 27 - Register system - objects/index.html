@@ -13,7 +13,7 @@
 
 
     <h2 class="title text-center text-success my-5 mx-auto ">Exercise</h2>
-    <h4 class="description text-center px-3 lh-lg">
+    <h4 class="description text-center px-3 lh-lg" dir="rtl">
         تمرین :
         یک سامانه ثبت نام پیاده سازی کنید
 
@@ -22,14 +22,49 @@
         و داخل آبجکتی مجزا در آرایه کاربران ذخیره کنید
         پس از انجام عمل ثبت نام، اطلالاعات تک تک کاربران را لاگ بگیرید
 
-        :نکات قابل توجه
+    </h4>
+    <h3 class=" px-3 lh-lg text-secondary" dir="rtl">
+        نکات قابل توجه :
         نام حداقل باید 3 کاراکتر و حداکثر 10 کاراکتر داشته باشد
         نام خانوادگی حداقل باید 3 کاراکتر و حداکثر باید 15 کاراکتر داشته باشد
-        سن حتما باید عدد بوده و حداکثر 3 رقم باشد
-    </h4>
+        سن حتما باید عدد بوده و بین 18 و 100 باشد
+    </h3>
+    <div class="row p-5">
+        <div class="col-4 mx-auto">
+            <div>
+                <input type="text" class="form-control" placeholder="First Name : " minlength="3" maxlength="10" id="fname">
+                <input type="text" class="form-control" placeholder="Last Name : " minlength="3" maxlength="15" id="lname">
+                <input type="number" class="form-control" placeholder="Age : " max="100" min="18" id="age">
+                <input type="email" class="form-control" placeholder="Email : " id="email">
+
+                <div class="my-3 row gap-4">
+                    <button class="btn btn-success col " id="send" type="submit">Send</button>
+                    <button class="btn btn-info col" id="log">Log</button>
+                </div>
+                <div class="text-success mx-auto text-center col-12 my-5" id="info"></div>
+            </div>
+        </div>
+    </div>
 
 
-    
+    <style>
+        @keyframes myMove {
+            0% {
+                font-size: 5rem;
+            }
+
+            100% {
+                font-size: 0rem;
+            }
+        }
+
+        .info-fade::after {
+            content: "Success";
+            font-size: 0rem;
+            animation: myMove ease 3000ms;
+        }
+    </style>
+
 
 
     <script>
@@ -56,24 +91,61 @@
             age: 46,
             email: "mohsen@gmail.com"
         }
-        let again = "y";
-        while (again != "n") {
 
 
-            users.push({
+
+
+        document.getElementById('send').addEventListener('click', function () {
+
+            let userFirstName = document.getElementById('fname').value;
+            let userLastName = document.getElementById('lname').value;
+            let userAge = document.getElementById('age').value;
+            let userEmail = document.getElementById('email').value;
+
+
+            if (userFirstName.length < 3 || userFirstName.length > 10) {
+                alert("First Name Length Must Be Between 3 To 10");
+                return;
+            }
+            if (userLastName.length < 3 || userLastName.length > 15) {
+                alert("Last Name Length Must Be Between 3 To 15");
+                return;
+            }
+            if (userAge > 100 || userAge < 18) {
+                alert("Age Length Must Be Between 18 To 100");
+                return;
+            }
+
+            let newUser = {
                 id: users.length + 1,
-                firstName: prompt("enter your first name : ", "reza"),
-                lastName: prompt("enter your last name : ", "bazdaran"),
-                age: +prompt("enter your age : ", 40),
-                email: prompt("enter your email : ", "rbazdaran@gmail.com")
-            })
-            if (users[users.length - 1].firstName.length < 3) { users.pop(); alert("Your first name must be more than 2 character")  }
+                firstName: userFirstName,
+                lastName: userLastName,
+                age: userAge,
+                email: userEmail
+            }
 
-            again = prompt("Again ? \n to cancel type : n \n to continue type : y ", "y")
+            users.push(newUser);
+            document.getElementById('info').innerHTML = "";
+            document.getElementById('info').classList.add('info-fade');
+            document.getElementById('send').disabled = true;
+            document.getElementById('log').disabled = true;
 
-        }
 
-         console.log(users);
+            setTimeout(() => {
+                document.getElementById('info').classList.remove('info-fade');
+                document.getElementById('send').disabled = false;
+                document.getElementById('log').disabled = false;
+            }, 3000);
+
+        })
+
+
+        document.getElementById('log').addEventListener('click', function () {
+            console.log(users);
+            document.getElementById('info').innerHTML = JSON.stringify(users);
+        })
+
+
 
 
     </script>
