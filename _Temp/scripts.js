@@ -1,15 +1,8 @@
-let users = [
-    { name: 'ali', age: 20 },
-    { name: 'reza', age: 30 },
-    { name: 'mohammad', age: 40 }
-]
+let scores = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
-let isInUsers = users.some(function () {
-    return user.name === 'ali';
+let ismoreThan15 = scores.every(function (score) {
+
+    console.log(score);
+    return score < 15
 })
-
-// let isInUsers = users.some((user) => user.name === 'ali'); // arrow function
-
-console.log(isInUsers);
-
-
+console.log(ismoreThan15);
