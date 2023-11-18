@@ -61,11 +61,14 @@
             // let productFinded = null;
 
             let isExistProduct = products.some(function (product) {
-                productFinded = {
-                    name: product.name,
-                    price: product.price
+                if (product.name == userRequest) {
+                    productFinded = {
+                        name: product.name,
+                        price: product.price
+                    }
+                    return true
                 }
-                return product.name == userRequest
+
             })
 
             if (isExistProduct) {
