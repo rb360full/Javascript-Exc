@@ -1,13 +1,16 @@
 
 
-let scores = [10, 9, 14, 9, 12, 17, 15];
+// let scores = [10, 9, 14, 12, 17, 14];
 
-let result = scores.filter(function (score) {
-    if (score > 12) {
+let text = 'Reza/Ali/amin';
 
-        return score;
-    }
-})
+let result =  text.split('/'); //    [ 'Reza', 'Ali', 'amin' ]
 
-console.log(result);   // [ 14, 17, 15 ]
 
+
+
+
+
+
+
+console.log(result);
