@@ -42,32 +42,37 @@
         let addProduct;
         let removeProduct;
 
-        if (userMenue == 1) {
-            addProduct = prompt("Type the Product you want Add: ");
-            var addProductIndex = allProducts.findIndex(function (product) {
-                return product.name == addProduct;
-            });
-            if (addProductIndex != -1) {
-                userCart.push(allProducts[addProductIndex]);
-                console.log(userCart);
-            } else {
-                alert("This Product not exist in Store !");
-            }
-        }
-        else {
-            removeProduct = prompt("Type the Product you want Remove: ");
+        switch (userMenue) {
+            case "1":
+                addProduct = prompt("Type the Product you want Add: ");
+                var addProductIndex = allProducts.findIndex(function (product) {
+                    return product.name == addProduct;
+                });
+                if (addProductIndex != -1) {
+                    userCart.push(allProducts[addProductIndex]);
+                    console.log(userCart);
+                } else {
+                    alert("This Product not exist in Store !");
+                }
+                break;
 
-            var removeProductIndex = userCart.findIndex(function (product) {
-                return product.name == removeProduct;
-            });
-            if (removeProductIndex != -1) {
-                userCart.splice(removeProductIndex, 1);
-                console.log(userCart);
-            } else {
-                alert("product not found in your Cart ! ");
-            }
-        }
+            case "2":
+                removeProduct = prompt("Type the Product you want Remove: ");
 
+                var removeProductIndex = userCart.findIndex(function (product) {
+                    return product.name == removeProduct;
+                });
+                if (removeProductIndex != -1) {
+                    userCart.splice(removeProductIndex, 1);
+                    console.log(userCart);
+                } else {
+                    alert("product not found in your Cart ! ");
+                }
+                break;
+            default:
+                alert("Enter True Value !");
+                break;
+        }
     </script>
 </body>
 
