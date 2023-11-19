@@ -1,8 +1,7 @@
-var names = ["reza", "sara", "ali", "mohammad", 'mohsen', 'akbar'];
-var userIndex =  names.findIndex(function (name) {
-    return name === 'mohsen';
-})
-console.log(userIndex); // Output : 4
+var users = ["reza", "sara", "ali", "mohammad", 'mohsen', 'akbar'];
+users.splice(3,1)
+console.log(users); // [ 'reza', 'sara', 'ali', 'mohsen', 'akbar' ]
+
 
 
 

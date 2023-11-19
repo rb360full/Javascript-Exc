@@ -12,38 +12,61 @@
 <body>
     <h2 class="title text-center text-success my-5 mx-auto">Exercise</h2>
     <h4 class="description text-center px-3 lh-lg" dir="rtl">
-        فرض کنید پلتفرمی مثل تلگرام ساخته اید و چند نفر در آن یک گروه ایجاد کردند و قصد ایجاد تماس کنفرانسی دارند اما شرط لازم برای ایجاد تماس کنفرانسی بالای 18
-        سال بودن اعضای گروه است اگر تمامی اعضا بالای 18 سال نبودند، اجازه ایجاد تماس کنفرانسی را ندهید
+        پروژه فروشگاه را در نظر بگیرید محصولات فروشگاه را داخل آرایه ای ذخیره کرده و آرایه ای برای سبد خرید در نظر بگیرید و داخل سبد خرید 3 محصول بطور دیفالت
+        قرار
+        دهید منویی را به کاربر نمایش دهید که شامل 2 گزینه است گزینه ای برای حذف محصول از سبد خرید و گزینه ای برای اضافه کردن محصول به سبد خرید عملیات لازم برای
+        هر
+        گزینه را پیاده سازی کنید
     </h4>
 
     <script>
-        let users = [
-            { id: 1, name: "ali", gender: "male", age: 18 },
-            { id: 2, name: "safoora", gender: "female", age: 22 },
-            { id: 3, name: "reza", gender: "male", age: 25 },
-            { id: 4, name: "mohsen", gender: "male", age: 54 },
+        let allProducts = [
+            { id: 1, name: "pen", price: 10 },
+            { id: 2, name: "mouse", price: 200 },
+            { id: 3, name: "phone", price: 500 },
+            { id: 4, name: "book", price: 100 },
+            { id: 5, name: "keyboard", price: 300 },
+            { id: 6, name: "ram", price: 400 },
+            { id: 7, name: "watch", price: 800 },
+            { id: 8, name: "water", price: 20 },
+            { id: 9, name: "labtop", price: 900 },
         ];
-        let newUserAge = +prompt("hello dear , please enter your age ? ", 18);
-        while (newUserAge < 100) {
-            newUser = {
-                id: 5,
-                name: "test",
-                gender: "male",
-                age: newUserAge,
-            };
 
-            users.push(newUser);
-            newUserAge = +prompt("hello dear , please enter your age ? ", 18);
+        let userCart = [
+            { id: 2, name: "mouse", price: 200 },
+            { id: 5, name: "keyboard", price: 300 },
+            { id: 9, name: "labtop", price: 900 },
+        ];
+
+        let userMenue = prompt("Please Select one option below : \n 1: Add Product \n 2: Remove Product", 1);
+        let addProduct;
+        let removeProduct;
+
+        if (userMenue == 1) {
+            addProduct = prompt("Type the Product you want Add: ");
+            var addProductIndex = allProducts.findIndex(function (product) {
+                return product.name == addProduct;
+            });
+            if (addProductIndex != -1) {
+                userCart.push(allProducts[addProductIndex]);
+                console.log(userCart);
+            } else {
+                alert("This Product not exist in Store !");
+            }
+        } else {
+            removeProduct = prompt("Type the Product you want Remove: ");
+
+            var removeProductIndex = userCart.findIndex(function (product) {
+                return product.name == removeProduct;
+            });
+            if (removeProductIndex != -1) {
+                userCart.splice(removeProductIndex, 1);
+                console.log(userCart);
+            } else {
+                alert("product not found in your Cart ! ");
+            }
         }
 
-        let isMoreThan18 = users.every(function (user) {
-            console.log(user.age);
-            return user.age >= 18;
-        });
-
-        console.log(isMoreThan18);
-
-        !isMoreThan18 ? console.log("The Group can not be made !") : console.log("Wellcome to the Group . . .");
     </script>
 </body>
 
