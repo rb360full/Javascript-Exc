@@ -1,7 +1,7 @@
 let todoList = [
-    { id: 1, todo: "study", completed: false },
-    { id: 2, todo: "exercise", completed: false },
-    { id: 3, todo: "footbal", completed: false },
+    { id: 1, todo: "study", isDone: false },
+    { id: 2, todo: "exercise", isDone: false },
+    { id: 3, todo: "footbal", isDone: false },
 ];
 
 document.querySelector("#result").innerHTML = todoList.map(JSON.stringify).join("<br>");
@@ -11,7 +11,7 @@ document.querySelector("#addbtn").addEventListener("click", function () {
     let todoNew = {
         id: todoList.length + 1,
         todo: userTodoAdd,
-        completed: false,
+        isDone: false,
     };
     todoList.push(todoNew);
     document.querySelector("#result").innerHTML = "";
@@ -41,7 +41,7 @@ document.querySelector("#completebtn").addEventListener("click", function (todo)
     todoList.map(function (item) {
         itemCompleted.forEach(function (itemC) {
             if (itemC.todo == item.todo) {
-                return (item.completed = true);
+                return (item.isDone = true);
             }
         });
     });
