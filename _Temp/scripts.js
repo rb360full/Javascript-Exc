@@ -1,16 +1,13 @@
 
 
-// let scores = [10, 9, 14, 12, 17, 14];
 
-let text = 'Reza/Ali/amin';
+let num1 = [1, 2, 3, 4];
+let num2 = [5, 6, 7, 8];
 
-let result =  text.split('/'); //    [ 'Reza', 'Ali', 'amin' ]
+const arr1 = [num1, num2];        // [ [ 1, 2, 3, 4 ], [ 5, 6, 7, 8 ] ]
+const arr2 = [num1.concat(num2)]; // [ 1, 2, 3, 4, 5, 6, 7, 8 ]
+const arr3 = [...num1, ...num2];  // [ 1, 2, 3, 4, 5, 6, 7, 8 ]
 
-
-
-
-
-
-
-
-console.log(result);
+console.log(arr1);
+console.log(arr2);
+console.log(arr3);
