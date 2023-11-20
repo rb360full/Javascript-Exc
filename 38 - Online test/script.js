@@ -15,13 +15,10 @@ let userAnswer;
 questions.forEach(function (question) {
     userQuestion = question.question;
     userAnswer = prompt(userQuestion);
-
-    questions.forEach(function (question) {
-        if (question.question === userQuestion && question.answer === userAnswer) {
+        if (question.answer === userAnswer) {
             userScores++;
             console.log(userScores);
         }
-    });
 });
 
 alert("Your Scores is : " + userScores);
