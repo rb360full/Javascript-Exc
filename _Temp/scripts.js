@@ -1,22 +1,15 @@
 
 
-let users = [
-    { id: 1, name: 'reza', age: 20 },
-    { id: 2, name: 'ali', age: 21 },
-    { id: 3, name: 'mohsen', age: 22 },
-    { id: 4, name: 'sara', age: 23 }
-]
+let i =10;
 
-var userData = users.find(function (user) {
-    return user.name === 'mohsen'
-})
-var userData2 = users.filter(function (user) {
-    return user.name === 'mohsen'
-})
+let timer = setInterval(function () {
+    
+    if(i==0){
+        clearInterval(timer)
+    }
 
-
-console.log("Output of find function : ", userData);
-console.log("Output of filter function : ", userData2);
-
+    console.log(i);
+    i--
+ }, 1000);
 
 
