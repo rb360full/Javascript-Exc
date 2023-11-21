@@ -1,15 +1,13 @@
 
+console.log("salam");
+setTimeout(() => {
+    console.log("1");
+}, 2000);
 
-let i =10;
+console.log("reza");
 
-let timer = setInterval(function () {
-    
-    if(i==0){
-        clearInterval(timer)
-    }
-
-    console.log(i);
-    i--
- }, 1000);
+setTimeout(function(){
+console.log("2");
+},1000)
 
 
