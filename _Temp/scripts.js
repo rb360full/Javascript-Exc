@@ -11,7 +11,6 @@ boxElem.addEventListener('dragover', DragoverHandler)
 
 function DragHandler(event) {
     let elemId = event.target.id;
-    let elem = document.getElementById(elemId)
     event.dataTransfer.setData('elemId', elemId)
 }
 
