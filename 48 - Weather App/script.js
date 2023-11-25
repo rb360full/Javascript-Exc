@@ -59,8 +59,8 @@ searchBtnElem.addEventListener("click", function () {
     sunElem.innerHTML = cityFounded.sun;
     sunIconElem.setAttribute("class", "");
     sunIconElem.classList.add("bi", "text-white", cityFounded.iconClass);
-    humidityElem.innerHTML = cityFounded.humidity;
-    windSpeedElem.innerHTML = cityFounded.windSpeed;
+    humidityElem.innerHTML = 'Humidity : ' + cityFounded.humidity;
+    windSpeedElem.innerHTML = 'Wind Speed : ' + cityFounded.windSpeed;
 
 
 });
