@@ -36,7 +36,6 @@ searchBtnElem.addEventListener("click", function () {
             isCityFound = true;
             backImgRandIndex = Math.floor(Math.random() * backImg.length);
             backImgRand = backImg[backImgRandIndex];
-            console.log(backImgRandIndex);
             document.body.style.backgroundImage = `url(img/${backImgRand})`;
 
             searchBoxElem.style.backgroundColor = "rgba(12, 2, 2, 0.8)";
@@ -63,5 +62,4 @@ searchBtnElem.addEventListener("click", function () {
         windSpeedElem.innerHTML = cityFounded.windSpeed;
     }
 
-    console.log(cityName);
 });
