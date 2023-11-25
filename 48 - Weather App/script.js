@@ -28,7 +28,7 @@ let citiesData = [
     { name: "abadan", degree: "45°C", sun: "Sunny", humidity: "36%", windSpeed: "15 km/h", iconClass: "bi-brightness-high-fill" },
 ];
 
-let unknownCity = { name: "unknown", degree: "- °C", sun: "-", humidity: "- %", windSpeed: "- km/h" };
+let unknownCity = { name: "unknown", degree: "- °C", sun: "-", humidity: "- %", windSpeed: "- km/h", iconClass: "bi-brightness-high-fill" };
 
 searchBtnElem.addEventListener("click", function () {
     let cityFounded = citiesData.find(function (cityData) {
@@ -48,18 +48,19 @@ searchBtnElem.addEventListener("click", function () {
         }
     });
 
-    let cityName = cityFounded.name.charAt(0).toUpperCase() + cityFounded.name.slice(1);
 
     if (isCityFound == false) {
         cityFounded = unknownCity;
-    } else {
-        cityNameElem.innerHTML = "Weather in " + cityName;
-        degreeElem.innerHTML = cityFounded.degree;
-        sunElem.innerHTML = cityFounded.sun;
-        sunIconElem.setAttribute("class", "");
-        sunIconElem.classList.add("bi", "text-white", cityFounded.iconClass);
-        humidityElem.innerHTML = cityFounded.humidity;
-        windSpeedElem.innerHTML = cityFounded.windSpeed;
+        console.log(cityFounded);
     }
+    let cityName = cityFounded.name.charAt(0).toUpperCase() + cityFounded.name.slice(1);
+    cityNameElem.innerHTML = "Weather in " + cityName;
+    degreeElem.innerHTML = cityFounded.degree;
+    sunElem.innerHTML = cityFounded.sun;
+    sunIconElem.setAttribute("class", "");
+    sunIconElem.classList.add("bi", "text-white", cityFounded.iconClass);
+    humidityElem.innerHTML = cityFounded.humidity;
+    windSpeedElem.innerHTML = cityFounded.windSpeed;
+
 
 });
