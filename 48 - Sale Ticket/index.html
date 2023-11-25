@@ -6,45 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Javascript-Exc</title>
     <link rel="stylesheet" href="bootstrap.css" />
+    <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
+<body class="p-5">
+    <h2 class="text-center text-warning mt-4">Exercise</h2>
 
+    <div class="row d-flex justify-content-around">
+        <div class="col-4">
+            <div class="mb-3">
+                <!-- <label for="fname" class="form-label">Name</label> -->
+                <input type="text" class="form-control" name="" id="fname" aria-describedby="helpId" placeholder="First Name" />
+                <small id="helpId" class="form-text text-muted">Please enter your first name ...</small>
+            </div>
+            <div class="mb-3">
+                <!-- <label for="phone" class="form-label">Name</label> -->
+                <input type="text" class="form-control" name="" id="phone" aria-describedby="helpId" placeholder="Phone Number" />
+                <small id="helpId" class="form-text text-muted">Please enter your Phone Number ...</small>
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <select class="form-select form-select-lg" name="" id="country">
+                    <option selected>Select one</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="mb-3">
+                <!-- <label for="lname" class="form-label">Last Name</label> -->
+                <input type="text" class="form-control" name="" id="lname" aria-describedby="helpId" placeholder="Last Name" />
+                <small id="helpId" class="form-text text-muted">Please enter your last name ...</small>
+            </div>
+            <div class="mb-3">
+                <!-- <label for="email" class="form-label">Email</label> -->
+                <input type="email" class="form-control" name="" id="phone" aria-describedby="helpId" placeholder="Email" />
+                <small id="helpId" class="form-text text-muted">Please enter your Email ...</small>
+            </div>
 
-    <div class="container-fluid d-flex flex-column justify-content-center align-items-center h-100" id="container">
-
-        <h2 class="title text-center text-success my-5 mx-auto">Exercise</h2>
-        <h4 class="description text-center px-3 lh-lg" dir="ltr">
-            Sale Ticket
-        </h4>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <select class="form-select form-select-lg" name="" id="city">
+                    <option selected>Select one</option>
+                </select>
+            </div>
+        </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <style>
-        body {
-            height: 100vh;
-        }
-
-        .background {
-            background-color: red;
-        }
-    </style>
-
-
-
-
-
 
     <script src="script.js"></script>
 </body>
