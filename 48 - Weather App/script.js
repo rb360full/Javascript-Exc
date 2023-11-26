@@ -8,7 +8,6 @@ function ChangeBackground() {
 
 ChangeBackground();
 
-let isCityFound = false;
 let inputCityElem = document.getElementById("inputCity");
 let searchBtnElem = document.getElementById("searchBtn");
 let searchBoxElem = document.getElementById("searchbox");
@@ -33,7 +32,6 @@ let unknownCity = { name: "unknown", degree: "- °C", sun: "-", humidity: "- %",
 searchBtnElem.addEventListener("click", function () {
     let cityFounded = citiesData.find(function (cityData) {
         if (cityData.name === inputCityElem.value) {
-            isCityFound = true;
             backImgRandIndex = Math.floor(Math.random() * backImg.length);
             backImgRand = backImg[backImgRandIndex];
             document.body.style.backgroundImage = `url(img/${backImgRand})`;
@@ -41,15 +39,12 @@ searchBtnElem.addEventListener("click", function () {
             searchBoxElem.style.backgroundColor = "rgba(12, 2, 2, 0.8)";
             searchBtnElem.style.backgroundColor = "rgba(12, 2, 2, 0.4)";
             inputCityElem.style.backgroundColor = "rgba(12, 2, 2, 0.2)";
-
             return true;
-        } else {
-            isCityFound = false;
         }
     });
 
 
-    if (isCityFound == false) {
+    if (!cityFounded) {
         cityFounded = unknownCity;
         console.log(cityFounded);
     }
