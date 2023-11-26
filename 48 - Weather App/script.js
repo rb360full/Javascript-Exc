@@ -40,6 +40,7 @@ searchBtnElem.addEventListener("click", function () {
             searchBtnElem.style.backgroundColor = "rgba(12, 2, 2, 0.4)";
             inputCityElem.style.backgroundColor = "rgba(12, 2, 2, 0.2)";
             return true;
+
         }
     });
 
@@ -50,6 +51,7 @@ searchBtnElem.addEventListener("click", function () {
     }
     let cityName = cityFounded.name.charAt(0).toUpperCase() + cityFounded.name.slice(1);
     cityNameElem.innerHTML = "Weather in " + cityName;
+    document.querySelector(".loading").innerHTML = ""
     degreeElem.innerHTML = cityFounded.degree;
     sunElem.innerHTML = cityFounded.sun;
     sunIconElem.setAttribute("class", "");
