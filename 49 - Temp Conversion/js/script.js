@@ -28,16 +28,20 @@ function CalcConvert() {
     if (convInputElem.getAttribute("placeholder") == "°C" && convInputElem.value != "") {
         convertedValue = convInputElem.value * (9 / 5) + 32;
         result = convInputElem.value + celSpanElem.innerHTML + " to " + convertedValue.toFixed(2) + farSpanElem.innerHTML;
+        resultElem.style.color = 'rgb(255, 255, 102)'
     } else if (convInputElem.getAttribute("placeholder") == "°F" && convInputElem.value != "") {
         convertedValue = (convInputElem.value - 32) * (5 / 9);
         result = convInputElem.value + celSpanElem.innerHTML + " to " + convertedValue.toFixed(2) + farSpanElem.innerHTML;
+        resultElem.style.color = 'rgb(255, 255, 102)'
     }
 
     if (isNaN(convertedValue)) {
         result = "Invalid Input";
+        resultElem.style.color = 'red'
     }
     if (convInputElem.value == "") {
         result = "Enter a Value please ...";
+        resultElem.style.color = 'red'
     }
 
     resultElem.innerHTML = result;
@@ -50,4 +54,5 @@ function Reset() {
     resultElem.innerHTML = "";
     convInputElem.setAttribute("placeholder", "°C");
     document.title = "| " + "°C" + " to " + "°F" + " |";
+    resultElem.style.color = 'rgb(255, 255, 102)'
 }
