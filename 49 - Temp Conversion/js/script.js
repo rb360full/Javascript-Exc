@@ -7,12 +7,15 @@ let celSpanElem = document.querySelector(".C");
 let farSpanElem = document.querySelector(".F");
 let resultElem = document.querySelector(".result");
 
-let result;
-let convertedValue;
-let resultColor;
+function CelciusToFahrenheit(celcius) {
+    let farenheit = celcius * (9 / 5) + 32;
+    return farenheit.toFixed(2);
+}
 
-
-
+function FahrenheitToCelcius(farenheit) {
+    let celcius = (farenheit - 32) * (5 / 9);
+    return celcius.toFixed(2);
+}
 
 function Swap() {
     let temp = farSpanElem.innerHTML;
@@ -20,34 +23,7 @@ function Swap() {
     convInputElem.setAttribute("placeholder", temp);
     celSpanElem.innerHTML = temp;
     document.title = "| " + temp + " to " + farSpanElem.innerHTML + " |";
-    if (convInputElem.value != "") {
-        CalcConvert();
-    }
-}
-
-let CalcConvert = function () {
-    if (convInputElem.getAttribute("placeholder") == "°C" && convInputElem.value != "") {
-        convertedValue = convInputElem.value * (9 / 5) + 32;
-        result = convInputElem.value + celSpanElem.innerHTML + " to " + convertedValue.toFixed(2) + farSpanElem.innerHTML;
-        resultColor = "rgb(255, 255, 102)";
-    } else if (convInputElem.getAttribute("placeholder") == "°F" && convInputElem.value != "") {
-        convertedValue = (convInputElem.value - 32) * (5 / 9);
-        result = convInputElem.value + celSpanElem.innerHTML + " to " + convertedValue.toFixed(2) + farSpanElem.innerHTML;
-        resultColor = "rgb(255, 255, 102)";
-    }
-
-    if (convInputElem.value == "") {
-        result = "Enter a Value please ...";
-        resultColor = "red";
-    }
-    else if (isNaN(convertedValue)) {
-        result = "Invalid Input";
-        resultColor = "red";
-    }
-
-
-    return { result:result , color: resultColor}
-}
+  }
 
 function Reset() {
     convInputElem.value = "";
@@ -59,15 +35,24 @@ function Reset() {
     resultElem.style.color = "rgb(255, 255, 102)";
 }
 
+function CalcElements() {
+    let result;
+    let color;
+    if (convInputElem.getAttribute("placeholder") == "°C" && convInputElem.value != "" && !isNaN(convInputElem.value)) {
+        result = convInputElem.value + " °C to " + CelciusToFahrenheit(convInputElem.value) + " °F";
+        color = "rgb(255, 255, 102)";
+    } else if (convInputElem.getAttribute("placeholder") == "°F" && convInputElem.value != "" && !isNaN(convInputElem.value)) {
+        result = convInputElem.value + " °F to " + FahrenheitToCelcius(convInputElem.value) + " °C";
+        color = "rgb(255, 255, 102)";
+    } else {
+        result = "Enter a True Value ...";
+        color = "red";
+    }
 
-
-
-function InsertDomElements() {
-    resultElem.style.color = CalcConvert().color
-    resultElem.innerHTML = CalcConvert().result;
-
+    resultElem.style.color = color;
+    resultElem.innerHTML = result;
 }
 
 changeBtnElem.addEventListener("click", Swap);
-convBtnElem.addEventListener("click", CalcConvert && InsertDomElements);
+convBtnElem.addEventListener("click", CalcElements);
 resetBtnElem.addEventListener("click", Reset);
