@@ -1,4 +1,14 @@
-body{
-  padding: 5rem;
-  text-align: center;
+ul {
+    font-size: 2rem;
+    margin: 2rem auto;
+    display: block;
+
+
+
+
+}
+
+
+li{
+    padding: 0.5rem;
 }
