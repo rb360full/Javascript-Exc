@@ -1,37 +1,89 @@
 ﻿let inputTodo = document.getElementById("inputTodo");
-let icons = document.querySelectorAll('i');
+let delIcons = document.getElementsByClassName("delete");
+let editIcons = document.getElementsByClassName("edit");
 let ulElem = document.querySelector("ul");
+let myModal = new bootstrap.Modal(document.getElementById("modalId"));
+let modalBody = document.getElementById("modalBody");
+let modalTitleId = document.getElementById("modalTitleId");
+
+function addTodo(todoItem) {
+    ulElem.innerHTML += `
+    <li class=" list-group-item d-flex justify-content-between align-items-center">
+    <span>${todoItem}</span>
+    <span>
+      <i class="fa fa-pencil edit px-3"></i>
+      <i class="fa fa-trash-o delete"></i>
+    </span>
+  </li>
+    `
+    inputTodo.value = "";
+    delIcons = document.getElementsByClassName("delete");
+    editIcons = document.getElementsByClassName("edit");
+}
+function delTodo(...iconsDel) {
+    iconsDel.forEach(function (icon) {
+
+        icon.addEventListener("click", function (event) {
+            event.target.parentElement.parentElement.remove();
+        });
+    });
+}
 
 
-icons.forEach(function (icon) {
-    icon.addEventListener('click', function (event) {
-        icon.parentElement.remove()
-    })
-})
 
-inputTodo.addEventListener('keydown', function (event) {
-    if (event.key == 'Enter') {
-        event.preventDefault();
-        let newLiElem = document.createElement('li');
-        newLiElem.className = "list-group-item d-flex justify-content-between align-items-center"
-        let newSpanElem = document.createElement('span')
+function editTodo(...iconsEdit) {
+    iconsEdit.forEach(function (icon) {
 
-        newIconElem = document.createElement('i');
-        newIconElem.className = "fa fa-trash-o delete";
-        newLiElem.appendChild(newSpanElem);
-        newLiElem.appendChild(newIconElem);
-        newSpanElem.innerText = inputTodo.value;
-        ulElem.appendChild(newLiElem)
+        console.log("edit start");
 
-        icons = document.querySelectorAll('i');
-        inputTodo.value = ''
+        icon.addEventListener('click', function (event1) {
 
 
-        icons.forEach(function (icon) {
-            icon.addEventListener('click', function (event) {
-                icon.parentElement.remove()
+            inputTodo.focus();
+            inputTodo.addEventListener("keydown", function (event2) {
+                if (event2.key == "Enter") {
+                    event2.preventDefault();
+                    console.log(event2);
+                    event1.target.parentElement.previousElementSibling.innerHTML = inputTodo.value;
+                    editIcons = ""
+                    return
+                    // inputTodo.value = "";
+                }
             })
         })
+    })
 
+
+
+
+
+}
+
+
+editTodo(...editIcons)
+
+
+
+
+
+
+
+
+delTodo(...delIcons)
+
+inputTodo.addEventListener("keydown", function (event) {
+    if (event.key == "Enter") {
+        event.preventDefault();
+        if (inputTodo.value == "") {
+            modalBody.innerHTML = "The Todo is Empty";
+            modalTitleId.innerHTML = "Invalid Todo";
+            myModal.toggle();
+        }
+        else {
+            // addTodo(inputTodo.value);
+            delTodo(...delIcons)
+            editTodo(...editIcons)
+
+        }
     }
-})
+});
