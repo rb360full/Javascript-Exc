@@ -32,22 +32,29 @@ function delTodo(...iconsDel) {
 
 
 function editTodo(...iconsEdit) {
+    let i = 0
     iconsEdit.forEach(function (icon) {
 
         console.log("edit start");
 
-        icon.addEventListener('click', function (event1) {
+        icon.addEventListener('click', function (event) {
+            i++
+            icon.setAttribute('edit-id', i)
+
 
 
             inputTodo.focus();
-            inputTodo.addEventListener("keydown", function (event2) {
-                if (event2.key == "Enter") {
-                    event2.preventDefault();
-                    console.log(event2);
-                    event1.target.parentElement.previousElementSibling.innerHTML = inputTodo.value;
-                    editIcons = ""
+            inputTodo.addEventListener("keydown", function (event) {
+                if (event.key == "Enter") {
+                    event.preventDefault();
+                    console.log(document.querySelector(`[edit-id="${i}"]`));
+                    document.querySelector(`[edit-id="${i}"]`).parentElement.previousElementSibling.innerText = inputTodo.value;
+                    console.log(inputTodo.value);
+
+
+                    inputTodo.value = "";
                     return
-                    // inputTodo.value = "";
+                    // editIcons = ""
                 }
             })
         })
