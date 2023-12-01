@@ -1,6 +1,5 @@
 ﻿let ul = document.querySelector("ul");
 let input = document.querySelector("input");
-
 function timeNow() {
   let date = new Date().toLocaleTimeString();
   return date;
