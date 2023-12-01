@@ -6,8 +6,6 @@ function timeNow() {
   return date;
 }
 
-console.log(timeNow());
-
 ul.addEventListener("click", (event) => {
   if (event.target.matches(".delete")) {
     event.target.parentElement.parentElement.remove();
