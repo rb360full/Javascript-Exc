@@ -1,40 +1,38 @@
-let $ = document;
-function _id(elemId = "") {
-    return $.getElementById(elemId);
-}
-function _class(elemClass = "") {
-    return $.querySelector("." + elemClass);
-}
-function _classes(elemClasses = "") {
-    return $.querySelectorAll("." + elemClasses);
+let ul = document.querySelector("ul");
+let input = document.querySelector("input");
+
+function timeNow() {
+  let date = new Date().toLocaleTimeString();
+  return date;
 }
 
-let ul = _class("list");
-let lis = _classes("list-item");
-let input = _id("input");
-let button = _id("button");
+console.log(timeNow());
 
-let localKeys = Object.keys(localStorage);
-let keyValueArray = [];
-for (let key of localKeys) {
-    let data = JSON.parse(localStorage.getItem(key));
-    let objectLocal = { key: key, value: data.value, date: data.date };
-    keyValueArray.push(objectLocal);
-}
-keyValueArray.sort(function (a, b) {
-    return a.date - b.date;
+ul.addEventListener("click", (event) => {
+  if (event.target.matches(".delete")) {
+    event.target.parentElement.parentElement.remove();
+  }
 });
 
-keyValueArray.forEach(function (item) {
-    ul.innerHTML += `<li class="list-item"><span>${item.value}</span></li>`;
+ul.addEventListener("click", (event) => {
+  if (event.target.matches(".edit")) {
+    let value = prompt("Enter new value");
+    event.target.parentElement.previousElementSibling.textContent = value;
+  }
 });
 
-console.log(keyValueArray);
-
-button.addEventListener("click", function () {
-    ul.innerHTML += `<li class="list-item"><span>${input.value}</span></li>`;
-    let date = new Date().getTime();
-    let inputVal = input.value;
-    let data = { value: inputVal, date: date };
-    localStorage.setItem(`todoItem${date}`, JSON.stringify(data));
+input.addEventListener("keydown", (event) => {
+  if (event.key == "Enter") {
+    event.preventDefault();
+    ul.innerHTML += `
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span>${input.value}</span>
+    <span>
+      <i>${timeNow()}</i>
+      <i class="fa fa-pencil px-3 edit" id="edit3"></i>
+      <i class="fa fa-trash-o delete" id="del3"></i>
+    </span>
+  </li>`;
+    input.value = "";
+  }
 });
