@@ -1,4 +1,12 @@
-*{
-    font-size: 1.5rem;
-    line-height: 2rem;
+body {
+    text-align: center;
+    margin: 2rem auto;
+}
+
+
+.box{
+    width: 200px;
+    height: 200px;
+    background-color: brown;
+    border: 1px solid yellow;
 }

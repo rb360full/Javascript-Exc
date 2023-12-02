@@ -1,17 +1,16 @@
-const ulElem = document.querySelector('ul');
-const li = document.querySelector('li');
+const box = document.getElementById('box');
 
-const p = document.querySelector('ul').children[0].innerHTML;
+function handleMouseMove() {
+  console.log('moved');
+}
 
-console.log(p);
+function removeMouseMoveListener() {
+  box.removeEventListener('mousemove', handleMouseMove);
+  console.log('removed');
+}
+
+box.addEventListener('click', removeMouseMoveListener);
+box.addEventListener('mousemove', handleMouseMove);
 
 
-ulElem.addEventListener('click',function(event){
-  const newValue = prompt('Enter new value');
-  
-  
-  event.target.closest('li').textContent = newValue
-})
-window.addEventListener('load',()=>{
-  alert('hi Welcome')
-})
+window.open('https://javascript.info/')
