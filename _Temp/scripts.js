@@ -12,3 +12,6 @@ ulElem.addEventListener('click',function(event){
   
   event.target.closest('li').textContent = newValue
 })
+window.addEventListener('load',()=>{
+  alert('hi Welcome')
+})
