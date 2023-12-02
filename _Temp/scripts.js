@@ -1,9 +1,14 @@
-function sumNumbers(inputArray) {
-  return inputArray.reduce((a, b) => a + b, 0);
-}
+const ulElem = document.querySelector('ul');
+const li = document.querySelector('li');
+
+const p = document.querySelector('ul').children[0].innerHTML;
+
+console.log(p);
 
 
-
-
-let numbers = [1, 2, 3, 4, 5,3,23,23,23,23,23];
-console.log(sumNumbers(numbers));  // Output: 15
+ulElem.addEventListener('click',function(event){
+  const newValue = prompt('Enter new value');
+  
+  
+  event.target.closest('li').textContent = newValue
+})
