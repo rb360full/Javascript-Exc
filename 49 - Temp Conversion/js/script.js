@@ -1,51 +1,70 @@
-﻿// define variables of the HTML elements
-let convInputElem = document.getElementById("converter");
-let convBtnElem = document.querySelector(".convertButton");
-let resetBtnElem = document.querySelector(".resetButton");
-let changeBtnElem = document.querySelector(".changeButton");
-let celSpanElem = document.querySelector(".C");
-let farSpanElem = document.querySelector(".F");
-let resultElem = document.querySelector(".result");
+﻿// Define variables for HTML elements
+const convInputElem = document.getElementById("converter");
+const convBtnElem = document.querySelector(".convertButton");
+const resetBtnElem = document.querySelector(".resetButton");
+const changeBtnElem = document.querySelector(".changeButton");
+const celSpanElem = document.querySelector(".C");
+const farSpanElem = document.querySelector(".F");
+const resultElem = document.querySelector(".result");
 
-function CelciusToFahrenheit(celcius) {
-    let farenheit = celcius * (9 / 5) + 32;
-    return farenheit.toFixed(2);
+// Convert Celsius to Fahrenheit
+function CelsiusToFahrenheit(celsius) {
+    const fahrenheit = celsius * (9 / 5) + 32;
+
+    return fahrenheit.toFixed(2);
 }
 
-function FahrenheitToCelcius(farenheit) {
-    let celcius = (farenheit - 32) * (5 / 9);
-    return celcius.toFixed(2);
+// Convert Fahrenheit to Celsius
+function FahrenheitToCelsius(fahrenheit) {
+    const celsius = (fahrenheit - 32) * (5 / 9);
+
+    return celsius.toFixed(2);
 }
 
-function Swap() {
-    let temp = farSpanElem.innerHTML;
+// Swap Celsius and Fahrenheit
+function swapTempUnits() {
+    const temp = farSpanElem.innerHTML;
     farSpanElem.innerHTML = celSpanElem.innerHTML;
     convInputElem.setAttribute("placeholder", temp);
     celSpanElem.innerHTML = temp;
-    document.title = "| " + temp + " to " + farSpanElem.innerHTML + " |";
-  }
+    document.title = `| ${temp} to ${farSpanElem.innerHTML} |`;
+}
 
-function Reset() {
+// Reset all elements
+function reset() {
     convInputElem.value = "";
     celSpanElem.innerHTML = "°C";
     farSpanElem.innerHTML = "°F";
     resultElem.innerHTML = "";
     convInputElem.setAttribute("placeholder", "°C");
-    document.title = "| " + "°C" + " to " + "°F" + " |";
+    document.title = "| °C to °F |";
     resultElem.style.color = "rgb(255, 255, 102)";
 }
 
-function CalcElements() {
+// Calculate elements
+function calculateElements() {
     let result;
     let color;
-    if (convInputElem.getAttribute("placeholder") == "°C" && convInputElem.value != "" && !isNaN(convInputElem.value)) {
-        result = convInputElem.value + " °C to " + CelciusToFahrenheit(convInputElem.value) + " °F";
+    if (
+        convInputElem.getAttribute("placeholder") == "°C" &&
+        convInputElem.value != "" &&
+        !isNaN(convInputElem.value)
+    ) {
+        result = `${convInputElem.value} °C to ${CelsiusToFahrenheit(
+            convInputElem.value
+        )} °F`;
         color = "rgb(255, 255, 102)";
-    } else if (convInputElem.getAttribute("placeholder") == "°F" && convInputElem.value != "" && !isNaN(convInputElem.value)) {
-        result = convInputElem.value + " °F to " + FahrenheitToCelcius(convInputElem.value) + " °C";
+    } else if (
+        convInputElem.getAttribute("placeholder") == "°F" &&
+        convInputElem.value != "" &&
+        !isNaN(convInputElem.value)
+    ) {
+        result = `${convInputElem.value} °F to ${FahrenheitToCelsius(
+            convInputElem.value
+        )} °C`;
         color = "rgb(255, 255, 102)";
     } else {
-        result = "Enter a True Value ...";
+        result = "Enter a valid value...";
         color = "red";
     }
 
@@ -53,6 +72,7 @@ function CalcElements() {
     resultElem.innerHTML = result;
 }
 
-changeBtnElem.addEventListener("click", Swap);
-convBtnElem.addEventListener("click", CalcElements);
-resetBtnElem.addEventListener("click", Reset);
+// Add event listeners
+changeBtnElem.addEventListener("click", swapTempUnits);
+convBtnElem.addEventListener("click", calculateElements);
+resetBtnElem.addEventListener("click", reset);
