@@ -6,6 +6,7 @@ const sectionElem = document.querySelector("section");
 function closeModal() {
     modalParentElem.style.display = "none";
     sectionElem.style.filter = "blur(0px)";
+    buttonElem.blur()
 }
 
 function openModal() {
