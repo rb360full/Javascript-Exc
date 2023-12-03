@@ -2,5 +2,7 @@ const inputElem = document.querySelector("form input");
 const counterElem = document.querySelector(".counter");
 
 inputElem.addEventListener("keyup", (e) => {
-    counterElem.innerHTML = 19 - e.target.value.length;
+    const maxLength = inputElem.getAttribute('maxlength')
+    let currentLength = e.target.value.length;
+    counterElem.innerHTML = maxLength - currentLength;
 });
