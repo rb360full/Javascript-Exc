@@ -1,30 +1,24 @@
-let $ = document
+const modalParentElem = document.querySelector(".modal-parent");
+const buttonElem = document.querySelector("button");
+const closeBtn = document.querySelector(".X");
+const sectionElem = document.querySelector("section");
 
-const button = $.querySelector('button')
-const modalParent = $.querySelector('.modal-parent')
-const x = $.querySelector('.X')
-const sectionElem = $.querySelector('section')
-
-
-function showModal() {
-    modalParent.style.display = 'block'
-    sectionElem.style.filter = 'blur(10px)'
-    button.blur()
+function closeModal() {
+    modalParentElem.style.display = "none";
+    sectionElem.style.filter = "blur(0px)";
 }
 
-function hideModalWithX() {
-    modalParent.style.display = 'none'
-    sectionElem.style.filter = 'blur(0px)'
+function openModal() {
+    modalParentElem.style.display = "block";
+    sectionElem.style.filter = "blur(10px)";
 }
 
-function hideModalWithEsc(event) {
-    if (event.keyCode === 27) {
-        modalParent.style.display = 'none'
-        sectionElem.style.filter = 'blur(0px)'
+buttonElem.addEventListener("click", openModal);
+
+closeBtn.addEventListener("click", closeModal);
+
+document.body.addEventListener("keydown", function (e) {
+    if (e.key == "Escape") {
+        closeModal();
     }
-}
-
-
-button.addEventListener('click', showModal)
-x.addEventListener('click', hideModalWithX)
-document.body.addEventListener('keyup', hideModalWithEsc)
+});
