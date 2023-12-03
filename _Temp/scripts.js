@@ -13,4 +13,7 @@ box.addEventListener('click', removeMouseMoveListener);
 box.addEventListener('mousemove', handleMouseMove);
 
 
-window.open('https://javascript.info/')
+document.body.addEventListener('touchcancel',function(){
+  console.log('touch Canceled');
+})
+
