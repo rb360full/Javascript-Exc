@@ -1,4 +1,24 @@
-body{
-    height: 100vh;
-    background: linear-gradient(rgb(71, 65, 65) 10% ,  rgb(39, 37, 37) 90%);
+body {
+  height: 100vh;
+  background: linear-gradient(rgb(71, 65, 65) 10%, rgb(39, 37, 37) 90%);
+}
+
+.repeat {
+  color: rgb(60, 215, 49);
+  background-color: #0b3d89;
+}
+
+#repeat:hover {
+  color: rgb(60, 215, 49);
+  background-color: #0b3d89;
+}
+
+.random {
+  color: rgb(118, 26, 126);
+  background-color: #162030;
+}
+
+#random:hover {
+  color: rgb(118, 26, 126);
+  background-color: #162030;
 }
