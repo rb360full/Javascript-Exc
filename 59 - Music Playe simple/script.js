@@ -9,6 +9,7 @@ const playbackSpeed = document.getElementById("speed");
 const resetBtn = document.getElementById("reset");
 const forwardBtn = document.getElementById("forward");
 const backwardBtn = document.getElementById("backward");
+const repeatBtn = document.getElementById('repeat');
 const trackNameElem = document.getElementById("trackname");
 const fileInput = document.getElementById("file-input");
 const durationElem = document.getElementById("duration");
@@ -21,6 +22,7 @@ const audioList = [
     { url: "media/music 03.mp3", name: "music 03" },
     { url: "media/music 04.mp3", name: "music 04" },
 ];
+let isRepeat = false;
 
 audioElem.setAttribute("src", audioList[0].url);
 
@@ -87,6 +89,37 @@ function stopMusic() {
     audioElem.currentTime = 0;
 }
 
+function repeatMusic() {
+    isRepeat = true;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // define Events
 
 playBtn.addEventListener("click", playMusic);
@@ -94,12 +127,22 @@ pauseBtn.addEventListener("click", pauseMusic);
 nextBtn.addEventListener("click", nextMusic);
 prevBtn.addEventListener("click", prevMusic);
 audioElem.addEventListener("timeupdate", timeUpdate);
-audioElem.addEventListener("ended", function () { nextMusic(); });
+audioElem.addEventListener("ended", function () {
+    if (!isRepeat) { nextMusic() }
+    else { audioElem.currentTime = 0, playMusic() }
+
+
+
+
+
+
+});
 playbackSpeed.addEventListener("click", function () { speedMusic(1.5); });
 resetBtn.addEventListener("click", function () { speedMusic(1); });
 forwardBtn.addEventListener("click", forwardMusic);
 backwardBtn.addEventListener("click", backwardMusic);
 stopBtn.addEventListener("click", stopMusic);
+repeatBtn.addEventListener('click', repeatMusic)
 
 durationElem.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
