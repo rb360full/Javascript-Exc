@@ -53,12 +53,13 @@ function pauseSong() {
   isPlaying = false;
   playBtn.classList.replace("fa-pause", "fa-play");
   playBtn.setAttribute("title", "Play");
-  myMusic.pause();
+  music.pause();
 }
 
 // Play or Pause Event Listener
 playBtn.addEventListener("click", function () {
-  if (playBtn) {
+  if (isPlaying) {
+    
     pauseSong()
   } else {
     playSong()
@@ -92,6 +93,7 @@ function prevSong() {
   if (songIndex === 0) {
     songIndex = songs.length - 1;
   }
+  
   loadSong(songs[songIndex]);
   playSong();
 }
