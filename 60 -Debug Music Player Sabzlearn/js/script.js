@@ -59,7 +59,8 @@ function pauseSong() {
 // Play or Pause Event Listener
 playBtn.addEventListener("click", function () {
   if (isPlaying) {
-    
+
+    console.log('true');
     pauseSong()
   } else {
     playSong()
@@ -89,11 +90,12 @@ let songIndex = 0;
 
 // Previous Song
 function prevSong() {
-  songIndex--;
   if (songIndex === 0) {
     songIndex = songs.length - 1;
   }
-  
+  else {
+    songIndex--;
+  }
   loadSong(songs[songIndex]);
   playSong();
 }
