@@ -18,6 +18,7 @@ const progressBar = document.querySelector(".progress");
 const progressContainer = document.querySelector(".progress-container");
 const currentDuration = document.querySelector(".current-duration");
 const totalDuration = document.querySelector(".total-duration");
+const volumeBar = document.getElementById("volume");
 
 // define variables
 const audioList = [
@@ -128,6 +129,12 @@ function progressBarClick(e) {
     playMusic();
 }
 
+
+
+function setVolume(vol) {
+    audioElem.volume = vol
+}
+
 // define Events
 
 playBtn.addEventListener("click", playMusic);
@@ -154,6 +161,22 @@ stopBtn.addEventListener("click", stopMusic);
 repeatBtn.addEventListener("click", repeatMusic);
 randomBtn.addEventListener("click", randomMusic);
 progressContainer.addEventListener("click", progressBarClick);
+let vol = audioElem.volume
+document.body.addEventListener("keydown", function (e) {
+    if (e.key == "ArrowUp") {
+        vol += 0.1
+        vol > 0 ? setVolume(vol) : vol = 0 && setVolume(0);
+        volumeBar.value = vol
+    }
+    if (e.key == 'ArrowDown') {
+        vol -= 0.1
+        vol > 0 ? setVolume(vol) : vol = 0 && setVolume(0);
+        volumeBar.value = vol
+    }
+
+
+
+})
 
 durationElem.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
