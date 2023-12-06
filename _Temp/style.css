@@ -1,13 +1,12 @@
 body {
-    text-align: center;
-    margin: 2rem auto;
-    height: 200vh;
-}
+  text-align: center;
+  margin: 2rem auto;
+  height: 100vh;
 
+  background-image: url(img/pic.jpg);
+  background-repeat: no-repeat;
 
-.box{
-    width: 200px;
-    height: 200px;
-    margin: 10px auto;
-    border: 2px solid green;
+  background-position: center;
+  background-size:100% 100%;
+  /* background-attachment: fixed; */
 }
