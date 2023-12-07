@@ -1,24 +1,25 @@
-#todoList label{
+#todoList label {
   width: 80%;
 }
-#todoList li{
+#todoList li {
   list-style-type: none;
 }
-.completed{
+.completed label {
   text-decoration: line-through;
   color: gray;
   font-style: italic;
-
 }
-.uncompleted label{
+.uncompleted label {
   color: #afa7a7;
   text-decoration: line-through;
 }
-#todoList .btn{
+#todoList .btn {
   margin-left: 10px;
 }
 
-.incompleted label{
-  
-  
+.incompleted label {
+}
+
+.well span {
+  padding: 15%;
 }
