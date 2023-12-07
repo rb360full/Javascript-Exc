@@ -5,6 +5,9 @@
   list-style-type: none;
 }
 .completed{
+  text-decoration: line-through;
+  color: gray;
+  font-style: italic;
 
 }
 .uncompleted label{
@@ -13,4 +16,9 @@
 }
 #todoList .btn{
   margin-left: 10px;
+}
+
+.incompleted label{
+  
+  
 }
