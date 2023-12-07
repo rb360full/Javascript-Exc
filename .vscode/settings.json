@@ -1,3 +1,5 @@
 {
-    "editor.inlineSuggest.showToolbar": "always"
+    "editor.inlineSuggest.showToolbar": "always",
+    "ai-test.endpoint": "76",
+    "ai-test.apiKey": ""
 }
