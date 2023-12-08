@@ -1,129 +1,109 @@
-// elements
-const body = document.body;
-const todoContainer = document.getElementById("todoList");
-const addButton = document.getElementById("addButton");
-const clearButton = document.getElementById("clearButton");
-const itemInput = document.getElementById("itemInput");
-const completeBtn = document.querySelector("button.btn.btn-success");
+// Elements
+const addTaskElem = document.getElementById("addButton");
+const inputTaskElem = document.getElementById("itemInput");
+const tasksContainer = document.getElementById("todoList");
+const clearTasksElem = document.getElementById("clearButton");
 
-// variables
-let todoArray = [];
-let liNew;
+// Variables
+let tasksArray = [];
 
-// functions
+// Functions
 
-function getTime() {
-    const currentTime = new Date();
+function randomId() {
+    return Date.now();
+}
+
+function getTimeNow() {
+    let currentTime = new Date();
     return currentTime.toLocaleTimeString();
 }
-function setAllTodoItems() {
-    localStorage.setItem("todoItem", JSON.stringify(todoArray));
-}
 
-function appendTodoElemnet(totoName, complete, classs, timeStart, timeEnd) {
-    liNew = document.createElement("li");
-    const labelNew = document.createElement("label");
-    const buttonNewComplete = document.createElement("button");
-    const buttonNewDelete = document.createElement("button");
-    liNew.className = `${classs} well`;
-
-    // liNew.classList.replace('completed', 'incomplete')
-
-    labelNew.innerHTML = totoName;
-    buttonNewComplete.className = "btn btn-success";
-    buttonNewComplete.innerHTML = complete;
-    buttonNewDelete.className = "btn btn-danger";
-    buttonNewDelete.innerHTML = "Delete";
-    liNew.append(labelNew);
-    liNew.append(buttonNewComplete);
-    liNew.append(buttonNewDelete);
-
-    todoContainer.append(liNew); // final Add Element
-
-    liNew.innerHTML += `<span>${timeStart} Started</span>
-                        <span dataset-time="done">${timeEnd}</span>`;
-}
-
-function getAllTodoItems() {
-    let todoLocalArray = JSON.parse(localStorage.getItem("todoItem"));
-    if (todoLocalArray) {
-        todoLocalArray.forEach((item) => {
-            let itemObject = {
-                id: item.id,
-                name: item.name,
-                complete: item.complete,
-                timeAdded: item.timeAdded,
-                timeCompleted: item.timeCompleted,
-                classs: item.classs,
-            };
-            appendTodoElemnet(item.name, item.complete, item.classs, item.timeAdded, item.timeCompleted);
-            liNew.setAttribute("id", item.id); // set id
-            todoArray.push(itemObject);
+function getLocalTasks() {
+    localTasksArray = JSON.parse(localStorage.getItem("task"));
+    if (localTasksArray) {
+        localTasksArray.forEach((task) => {
+            tasksArray.push(task);
+            appendTask(task.id, task.classs, task.task, task.status, task.timeStart, task.timeEnd);
         });
     }
 }
 
-function addTodoItem(todoName) {
-    let randomId = Date.now();
-    randomId++;
-    let itemObject = { id: randomId, name: todoName, complete: "InCompleted", timeAdded: getTime(), timeCompleted: "Not yet Done", classs: "incompleted" };
-    appendTodoElemnet(todoName, itemObject.complete, itemObject.classs, itemObject.timeAdded, itemObject.timeCompleted);
-    liNew.setAttribute("id", randomId); // set id
-    todoArray.push(itemObject);
-    setAllTodoItems();
-    itemInput.value = "";
+function appendTask(id, classs, task, status, timeStart, timeEnd) {
+    let newLi = `<li id="${id}" class="${classs} well">
+                 <label>${task}</label>
+                 <button class="btn btn-success status">${status}</button>
+                 <button class="btn btn-danger">Delete</button>
+                 <span class="">${timeStart} Start</span>
+                 <span class="time-end">${timeEnd} Done</span>
+                 </li>`;
+    tasksContainer.innerHTML += newLi;
 }
 
-// events
-document.addEventListener("DOMContentLoaded", getAllTodoItems);
+function addTask() {
+    let newTask = makeTaskObject();
+    tasksArray.push(newTask);
+    localStorage.setItem("task", JSON.stringify(tasksArray));
+    appendTask(newTask.id, newTask.classs, newTask.task, newTask.status, newTask.timeStart, newTask.timeEnd);
+    inputTaskElem.value = "";
+    inputTaskElem.focus();
+}
 
-addButton.addEventListener("click", function () {
-    addTodoItem(itemInput.value);
+function makeTaskObject() {
+    let task = inputTaskElem.value;
+    let status = "inComplete";
+    let timeStart = getTimeNow();
+    let timeEnd = "not yet";
+    let classs = "incompleted";
+
+    let taskObject = { id: randomId(), task: task, status: status, timeStart: timeStart, timeEnd: timeEnd, classs: classs };
+    return taskObject;
+}
+
+function clearTasks() {
+    localStorage.removeItem("task");
+    tasksArray = [];
+    tasksContainer.innerHTML = "";
+}
+
+// Events
+addTaskElem.addEventListener("click", addTask);
+inputTaskElem.addEventListener("keydown", function (e) {
+    e.key == "Enter" ? addTask() : null;
 });
-itemInput.addEventListener("keydown", function (e) {
-    e.key == "Enter" ? addTodoItem(itemInput.value) : null;
-});
-todoContainer.addEventListener("click", (e) => {
-    if (e.target.className == "btn btn-danger") {
-        let target = e.target.closest("li");
-        let targetId = target.getAttribute("id");
-        let removeItem = todoArray.find(function (item) {
-            return item.id == targetId;
+clearTasksElem.addEventListener("click", clearTasks);
+document.addEventListener("DOMContentLoaded", getLocalTasks);
+
+tasksContainer.addEventListener("click", (e) => {
+    if (e.target.innerHTML == "Delete") {
+        liTarget = e.target.closest("li");
+        liTargetId = e.target.closest("li").id;
+        let findedTask = tasksArray.find(function (task) {
+            return task.id == liTargetId;
         });
-        todoArray.splice(todoArray.indexOf(removeItem), 1);
-        setAllTodoItems();
-        target.remove();
+        tasksArray.splice(tasksArray.indexOf(findedTask), 1);
+        liTarget.remove();
+        localStorage.setItem("task", JSON.stringify(tasksArray));
     }
 });
-todoContainer.addEventListener("click", (e) => {
-    if (e.target.className == "btn btn-success" && e.target.innerHTML == "InCompleted") {
-        e.target.closest("li").className = "completed well";
-        let findedItem = todoArray.find(function (item) {
-            return e.target.closest("li").getAttribute("id") == item.id;
-        });
-        findedItem.complete = "Completed";
-        findedItem.timeCompleted = getTime();
-        findedItem.classs = "completed";
-        setAllTodoItems();
-        e.target.innerHTML = "Completed";
-        e.target.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML = findedItem.timeCompleted;
-    } else if (e.target.className == "btn btn-success" && e.target.innerHTML == "Completed") {
-        e.target.closest("li").className = "incompleted well";
-        let findedItem = todoArray.find(function (item) {
-            return e.target.closest("li").getAttribute("id") == item.id;
-        });
-        findedItem.complete = "InCompleted";
-        findedItem.timeCompleted = "Not yet Done";
-        findedItem.classs = "incompleted";
+tasksContainer.addEventListener("click", (e) => {
+    if (e.target.matches(".status")) {
+        liTarget = e.target.closest("li");
+        liTargetId = e.target.closest("li").id;
 
-        setAllTodoItems();
-        e.target.innerHTML = "InCompleted";
-        e.target.nextElementSibling.nextElementSibling.nextElementSibling.innerHTML = findedItem.timeCompleted;
+        let findedTask = tasksArray.find(function (task) {
+            return task.id == liTargetId;
+        });
+        tasksArrayItem = tasksArray[tasksArray.indexOf(findedTask)];
+
+        tasksArrayItem.status = tasksArrayItem.status === "inComplete" ? "Completed" : "inComplete";
+        e.target.innerHTML = e.target.innerHTML === "inComplete" ? "Completed" : "inComplete";
+
+        tasksArrayItem.classs = tasksArrayItem.classs === "incompleted" ? "completed" : "incompleted";
+        e.target.closest("li").className = e.target.closest("li").className === "incompleted well" ? "completed well" : "incompleted well";
+
+        tasksArrayItem.timeEnd = tasksArrayItem.timeEnd === "not yet" ? getTimeNow() : "not yet";
+        e.target.parentElement.children[4].innerHTML = tasksArrayItem.timeEnd + " Done";
+
+        localStorage.setItem("task", JSON.stringify(tasksArray));
     }
-});
-
-clearButton.addEventListener("click", function () {
-    todoContainer.innerHTML = "";
-    todoArray = [];
-    localStorage.removeItem("todoItem");
 });

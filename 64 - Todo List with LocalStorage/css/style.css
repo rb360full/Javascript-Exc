@@ -20,6 +20,17 @@
   color: gray;
   font-style: italic;
 }
+
+.completed span {
+  text-decoration: line-through;
+  color: gray;
+  font-style: italic;
+}
+
+li.completed {
+  background-color: rgba(45, 40, 32, 0.086);
+  font-style: italic;
+}
 .uncompleted label {
   color: #afa7a7;
   text-decoration: line-through;
