@@ -23,12 +23,14 @@ function getLocalTasks() {
     if (localTasksArray) {
         localTasksArray.forEach((task) => {
             tasksArray.push(task);
-            appendTask(task.id, task.classs, task.task, task.status, task.timeStart, task.timeEnd);
+            appendTask(task.id, task.classs, task.task, task.status, task.timeStart, task.timeEnd, "after");
         });
     }
+
+    console.log(tasksArray);
 }
 
-function appendTask(id, classs, task, status, timeStart, timeEnd) {
+function appendTask(id, classs, task, status, timeStart, timeEnd, situaion = "before") {
     let newLi = `<li id="${id}" class="${classs} well">
                  <label>${task}</label>
                  <button class="btn btn-success status">${status}</button>
@@ -36,16 +38,20 @@ function appendTask(id, classs, task, status, timeStart, timeEnd) {
                  <span class="">${timeStart} Start</span>
                  <span class="time-end">${timeEnd} Done</span>
                  </li>`;
-    tasksContainer.innerHTML += newLi;
+
+    let el = document.createRange().createContextualFragment(newLi);
+    situaion == "before" ? tasksContainer.insertBefore(el, tasksContainer.firstChild) : tasksContainer.appendChild(el);
 }
 
 function addTask() {
     let newTask = makeTaskObject();
-    tasksArray.push(newTask);
+    tasksArray.unshift(newTask);
     localStorage.setItem("task", JSON.stringify(tasksArray));
     appendTask(newTask.id, newTask.classs, newTask.task, newTask.status, newTask.timeStart, newTask.timeEnd);
     inputTaskElem.value = "";
     inputTaskElem.focus();
+
+    console.log(tasksArray);
 }
 
 function makeTaskObject() {
