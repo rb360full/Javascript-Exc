@@ -83,10 +83,10 @@ tasksContainer.addEventListener("click", (e) => {
     if (e.target.innerHTML == "Delete") {
         liTarget = e.target.closest("li");
         liTargetId = e.target.closest("li").id;
-        let findedTask = tasksArray.find(function (task) {
+        let findedTaskIndex = tasksArray.findIndex(function (task) {
             return task.id == liTargetId;
         });
-        tasksArray.splice(tasksArray.indexOf(findedTask), 1);
+        tasksArray.splice(findedTaskIndex, 1);
         liTarget.remove();
         localStorage.setItem("task", JSON.stringify(tasksArray));
     }
