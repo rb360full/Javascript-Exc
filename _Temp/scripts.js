@@ -23,7 +23,8 @@ function getLocalTasks() {
     if (localTasksArray) {
         localTasksArray.forEach((task) => {
             tasksArray.push(task);
-            appendTask(task.id, task.classs, task.task, task.status, task.timeStart, task.timeEnd, "after");
+            // appendTask(task.id, task.classs, task.task, task.status, task.timeStart, task.timeEnd, "after");
+            appendTask2(task, "after");
         });
     }
 
@@ -43,11 +44,36 @@ function appendTask(id, classs, task, status, timeStart, timeEnd, situaion = "be
     situaion == "before" ? tasksContainer.insertBefore(el, tasksContainer.firstChild) : tasksContainer.appendChild(el);
 }
 
+
+
+
+
+function appendTask2(task, situaion = "before") {
+    let newLi = `<li id="${task.id}" class="${task.classs} well">
+                 <label>${task.task}</label>
+                 <button class="btn btn-success status">${task.status}</button>
+                 <button class="btn btn-danger">Delete</button>
+                 <span class="">${task.timeStart} Start</span>
+                 <span class="time-end">${task.timeEnd} Done</span>
+                 </li>`;
+
+    let el = document.createRange().createContextualFragment(newLi);
+    situaion == "before" ? tasksContainer.insertBefore(el, tasksContainer.firstChild) : tasksContainer.appendChild(el);
+}
+
+
+
+
+
+
+
+
 function addTask() {
     let newTask = makeTaskObject();
     tasksArray.unshift(newTask);
     localStorage.setItem("task", JSON.stringify(tasksArray));
-    appendTask(newTask.id, newTask.classs, newTask.task, newTask.status, newTask.timeStart, newTask.timeEnd);
+    // appendTask(newTask.id, newTask.classs, newTask.task, newTask.status, newTask.timeStart, newTask.timeEnd);
+    appendTask2(newTask);
     inputTaskElem.value = "";
     inputTaskElem.focus();
 
