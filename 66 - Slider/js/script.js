@@ -1,28 +1,50 @@
+// Elements
 const $ = document;
 const prev = $.querySelector(".prev");
 const next = $.querySelector(".next");
 let sliderItem = $.querySelectorAll(".slider-item");
+let sliderItemImage = $.querySelectorAll(".img-slider");
+
+console.log(sliderItem);
+
+// Variables
 let index = 0;
-// console.log(sliderItem);
+let sliderItemIndex = 0;
+let intervalId;
+let images = ["image/1.jpg", "image/2.png", "image/3.jpg"];
+
+// Functions
+function nextItem() {
+  index = index < images.length - 1 ? index + 1 : 0;
+
+  sliderItem[(sliderItemIndex = sliderItemIndex == 0 ? 1 : 0)].classList.add("active");
+  sliderItem[(sliderItemIndex = sliderItemIndex == 1 ? 0 : 1)].classList.remove("active");
+  sliderItemImage[(sliderItemIndex = sliderItemIndex == 0 ? 1 : 0)].src = images[index];
+}
 
 function prevItem() {
-    index--
-    sliderItem[index + 1].classList.remove('active')
-    if (index < 0) {
-        index = sliderItem.length - 1
-    }
-    sliderItem[index].classList.add('active')
-    console.log(index);
-}
-function nextItem() {
-  index++;
-  sliderItem[index - 1].classList.remove('active')
-  if (index > sliderItem.length - 1) {
-    index = 0;
-  }
-  sliderItem[index].classList.add("active");
+  index = index == 0 ? images.length - 1 : index - 1;
+  sliderItem[(sliderItemIndex = sliderItemIndex == 0 ? 1 : 0)].classList.add("active");
+  sliderItem[(sliderItemIndex = sliderItemIndex == 1 ? 0 : 1)].classList.remove("active");
+  sliderItemImage[(sliderItemIndex = sliderItemIndex == 0 ? 1 : 0)].src = images[index];
 }
 
-setInterval(nextItem , 4000)
-prev.addEventListener("click", prevItem);
-next.addEventListener("click", nextItem);
+function startInterval() {
+  clearInterval(intervalId);
+  intervalId = setInterval(() => {
+    nextItem();
+  }, 3000);
+}
+
+// Events
+
+next.addEventListener("click", () => {
+  nextItem();
+  startInterval();
+});
+prev.addEventListener("click", () => {
+  prevItem();
+  startInterval();
+});
+
+startInterval();
