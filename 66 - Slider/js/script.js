@@ -11,7 +11,7 @@ console.log(sliderItem);
 let index = 0;
 let sliderItemIndex = 0;
 let intervalId;
-let images = ["image/1.jpg", "image/2.png", "image/3.jpg"];
+let images = ["image/1.jpg", "image/2.png", "image/3.jpg", "image/4.jpg", "image/5.jpg", "image/6.jpg"];
 
 // Functions
 function nextItem() {
