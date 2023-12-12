@@ -1,27 +1,43 @@
-const box = document.querySelector('div')
-const input = document.querySelector('input')
-
-const button = document.querySelector('button[type="submit"]')
+const grid = document.getElementById('grid');
+const cells = document.querySelectorAll('.cell');
 
 
+let arr = [[], [], []]
+let k = 0
+for (let i = 0; i < 3; i++) {
+
+    for (let j = k; j < k + 3; j++) {
+
+        arr[i].push(cells[j].innerHTML);
+
+    }
+    k = k + 3
+}
 
 
 
-button.onclick = () => {
-    try {
-        if (input.value.length > 5) {
 
-            throw "greater than 5"
-        } else if(input.value.length < 2){
-            throw 'less than 2'
+for (let i = 0; i < 3; i++) {
+
+    for (let j = 0; j < 3; j++) {
+
+        let count = 0
+        if (!arr[i][j]) {
+            count++
+            arr[i][j] = count
+            let finded = arr[i].find(x => x == count)
+            console.log(finded);
+
+            if (!finded || finded == count) {
+
+
+
+
+
+                break
+            }
         }
 
-    } catch (err) {
-        console.error(err);
-
-
-    } finally {
-        console.log('done');
 
     }
 }
@@ -29,5 +45,4 @@ button.onclick = () => {
 
 
 
-
-
+console.log(arr);
