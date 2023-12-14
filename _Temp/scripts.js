@@ -1,48 +1,19 @@
-const grid = document.getElementById('grid');
-const cells = document.querySelectorAll('.cell');
-
-
-let arr = [[], [], []]
-let k = 0
-for (let i = 0; i < 3; i++) {
-
-    for (let j = k; j < k + 3; j++) {
-
-        arr[i].push(cells[j].innerHTML);
-
-    }
-    k = k + 3
-}
 
 
 
+let myDate = new Date();
+let year = myDate.getFullYear(); // 2023
 
-for (let i = 0; i < 3; i++) {
 
-    for (let j = 0; j < 3; j++) {
+let mounth = myDate.getMonth(); // 11 ==> but we are in December that is 12th mounth of year
 
-        let count = 0
-        if (!arr[i][j]) {
-            count++
-            arr[i][j] = count
-            let finded = arr[i].find(x => x == count)
-            console.log(finded);
+let date = myDate.getDate()
+console.log('');
 
-            if (!finded || finded == count) {
+
+console.log(myDate.toISOString());
 
 
 
 
-
-                break
-            }
-        }
-
-
-    }
-}
-
-
-
-
-console.log(arr);
+ 
