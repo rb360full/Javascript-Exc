@@ -1,7 +1,9 @@
+// Elements
 const body = document.body;
 const list = document.getElementById("list");
 const pagination = document.getElementById("pagination");
 
+// Data
 const users = [
     { id: 1, name: "Amin", family: "Saeedi Rad" },
     { id: 2, name: "Amir", family: "Zehtab" },
@@ -10,10 +12,10 @@ const users = [
     { id: 5, name: "Hasan", family: "Ghahreman Zadeh" },
 
     { id: 6, name: "Reza", family: "Bazdaran" },
-    { id: 7, name: "Amir", family: "Zehtab" },
-    { id: 8, name: "Qadir", family: "Yolme" },
-    { id: 9, name: "Babak", family: "Mohammadi" },
-    { id: 10, name: "Hasan", family: "Ghahreman Zadeh" },
+    { id: 7, name: "Nader", family: "Tahmasb" },
+    { id: 8, name: "Mohammad", family: "akbari" },
+    { id: 9, name: "Mostafa", family: "Sheykhi" },
+    { id: 10, name: "Iman", family: "Zarei" },
 
     { id: 11, name: "Saeed", family: "Ehsani" },
     { id: 12, name: "Siamak", family: "Modiri" },
@@ -31,38 +33,42 @@ const users = [
     { id: 22, name: "Matin", family: "Sahebi" },
 ];
 
-function paginate(usersArray, user_in_page, start_page) {
-    let counter = 0;
+// Variables
+let user_in_page = 3;
+let pageStart = 4;
 
+
+// Functions
+function paginate(usersArray, user_in_page) {
     let pages = Math.ceil(usersArray.length / user_in_page);
-
     for (let i = 1; i <= pages; i++) {
         pagination.innerHTML += `<button id='page-${i}' class="">${i}</button>`;
     }
+}
 
-
-
-
-
-
-    pagination.addEventListener("click", (event) => {
-        let pageNumber = event.target.innerHTML;
-        console.log("pageNumber : ", pageNumber);
-        list.innerHTML = "";
-        counter = (pageNumber - 1) * user_in_page;
-
-        let sliced = usersArray.slice(counter, user_in_page + counter);
-        console.log(sliced);
-        sliced.forEach((user) => {
-            list.innerHTML += `<div class="item">${user.name} ${user.family}</div>`;
-        });
+function sliceUsers(user_in_page, pageNumber) {
+    list.innerHTML = "";
+    counter = (pageNumber - 1) * user_in_page;
+    let sliced = users.slice(counter, user_in_page + counter);
+    sliced.forEach((user) => {
+        list.innerHTML += `<div class="item">${user.name} ${user.family}</div>`;
     });
 }
 
-paginate(users, 5, 1);
+// Events
+pagination.addEventListener("click", function (event) {
+    let pageBtns = document.querySelectorAll("button");
+    pageBtns.forEach((btn) => { btn.classList.remove("active"); });
+    event.target.className = "active";
+    sliceUsers(user_in_page, event.target.innerHTML);
+});
 
 
+window.addEventListener("load", function () {
+    sliceUsers(user_in_page, pageStart);
+    this.document.getElementById(`page-${pageStart}`).classList.add("active");
+});
 
-// window.addEventListener('load', function () {
-//     alert('msg');
-// })
+
+// Call Functions
+paginate(users, user_in_page, pageStart);
