@@ -37,8 +37,8 @@ const intervalId = setInterval(function () {
         clearInterval(intervalId);
     } else {
         agahiArray.forEach((agahi) => {
-            var encodedMessage = encodeURI(agahi);
             sendMessageToTelegramBot(agahi, chatId);
+            var encodedMessage = encodeURI(agahi);
             sendMessageToTelegramBot(encodedMessage, "@MyAlarmChannel");
         });
 
