@@ -33,12 +33,14 @@ const intervalId = setInterval(function () {
 
         console.log(agahiArray);
     }
+    console.log('%c%s', 'color: #433385',         console.log(agahiArray);
+);
     if (JSON.stringify(agahiLocal) == JSON.stringify(agahiArray)) {
         clearInterval(intervalId);
     } else {
         agahiArray.forEach((agahi) => {
             var encodedMessage = encodeURI(agahi);
-            sendMessageToTelegramBot(agahi, chatId);
+            sendMessageToTelegramBot(encodedMessage, chatId);
             sendMessageToTelegramBot(encodedMessage, "@MyAlarmChannel");
         });
 
@@ -49,7 +51,7 @@ const intervalId = setInterval(function () {
 }, 5000);
 
 setTimeout(function () {
-    location.reload();
+   document.location.reload();
 }, 10000);
 
 function sendMessageToTelegramBot(post, chatId) {
