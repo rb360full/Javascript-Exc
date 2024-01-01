@@ -1,0 +1,17 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+body{
+    height: 500vh;
+}
+
+
+#scroll{
+    height: 10px;
+    background-color: red;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    top: 0px;
+}
