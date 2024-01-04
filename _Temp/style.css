@@ -1,19 +1,28 @@
-.grid{
-  margin: 50px auto;
-  text-align: center;
-  box-sizing: border-box;
-  
-  width: 300px;
-  height: 300px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+.box{
+  height: 500px;
+  border: dotted 2px greenyellow ;
 
-  
 }
 
 
-div{
-  border: solid 1px black;
-  box-sizing: border-box;
+
+.box div:first-child{
+  height: 100px;
+  width: 40%;
+  background-color: red;
+  display: inline-block;
+  
+  margin: 0px;
+}
+
+.box div:nth-child(2){
+  height: 100px;
+  width: 40%;
+  background-color: blue;
+  display: inline-block;
+  margin: 0px;
+}
+
+.box div + div {
+  border:  solid 5px black;
 }
