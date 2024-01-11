@@ -50,6 +50,7 @@ body{
   pointer-events: none;
   max-height: 280px;
   overflow-y: auto;
+  
 }
 
 .search-input.active .autocom-box{
