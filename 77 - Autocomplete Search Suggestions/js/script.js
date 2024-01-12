@@ -3,7 +3,6 @@ const searchInput = document.querySelector(".search-input input"); // searchinpu
 
 const autocomBox = document.querySelector(".autocom-box"); // autocombox
 
-
 let suggestions = [
     "Channel",
     "CodingLab",
@@ -33,48 +32,35 @@ let suggestions = [
     "What does CSS stands for?",
 ];
 
-
-
 let result = [];
-
-
-
-
-
-
-
-
-
-
-
 
 // Events
 
-
-searchInput.addEventListener('keyup', (event) => {
+searchInput.addEventListener("keyup", (event) => {
     result = suggestions.filter(function (suggestion) {
         return suggestion.toLowerCase().includes(searchInput.value.toLowerCase());
-    })
+    });
 
-    searchInputDiv.classList.add("active")
+    searchInputDiv.classList.add("active");
 
     autocomBox.style.opacity = 1;
 
-    autocomBox.innerHTML = '';
+    autocomBox.innerHTML = "";
     result.forEach(function (item) {
-        autocomBox.insertAdjacentHTML('afterbegin', `
+        autocomBox.insertAdjacentHTML(
+            "afterbegin",
+            `
         <ul>
         <li>
         ${item}
         </li>
         </ul>
-        `)
-    })
+        `
+        );
+    });
+});
 
-})
-
-autocomBox.addEventListener('click', (event) => {
-
+autocomBox.addEventListener("click", (event) => {
     searchInput.value = event.target.innerText;
-    searchInputDiv.classList.remove("active")
-})
+    searchInputDiv.classList.remove("active");
+});
