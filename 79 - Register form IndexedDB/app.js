@@ -8,11 +8,13 @@ const btnSubmit = document.querySelector("button");
 const nameInput = document.querySelector('input[type="text"]');
 const passInput = document.querySelector('input[type="password"]');
 const emailInput = document.querySelector('input[type="email"]');
+const tbody = document.querySelector("tbody");
 
 let dbOpenReq = indexedDB.open("Reza", dbVersion);
 
 dbOpenReq.addEventListener("success", (e) => {
     console.log("Open success :", e);
+    getUsers();
 });
 dbOpenReq.addEventListener("error", (e) => console.log(e));
 dbOpenReq.addEventListener("upgradeneeded", (e) => {
@@ -44,4 +46,40 @@ btnSubmit.addEventListener("click", (e) => {
 
     let txRequest = store.add(newUser);
     txRequest.addEventListener("success", (e) => { });
+    getUsers();
+    clearValues();
 });
+
+function getUsers() {
+    let tx = db.transaction("users", "readonly");
+    tx.addEventListener("complete", console.log("tx completed"));
+    tx.addEventListener("error", console.log("tx error"));
+
+    let store = tx.objectStore("users");
+
+    let request = store.getAll();
+    request.addEventListener("success", (event) => {
+        console.log("request success");
+        let usersArray = request.result;
+        let mapArray = usersArray
+            .map((user) => {
+                return `
+            <tr class="">
+            <td scope="row">${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.pass}</td>
+            <td>${user.email}</td>
+            </tr>`;
+            })
+            .join("");
+        console.log(mapArray);
+        tbody.innerHTML = mapArray;
+    });
+    request.addEventListener("error", (err) => console.log("request error : ", err));
+}
+
+function clearValues() {
+    nameInput.value = "";
+    passInput.value = "";
+    emailInput.value = "";
+}
