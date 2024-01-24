@@ -26,7 +26,7 @@ dbOpenReq.addEventListener("upgradeneeded", (e) => {
 
 btnSubmit.addEventListener("click", (e) => {
     let tx = db.transaction("users", "readwrite");
-    tx.addEventListener("success", (e) => {
+    tx.addEventListener("comleted", (e) => {
         console.log("sub suc");
     });
 
