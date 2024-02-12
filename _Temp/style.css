@@ -1,14 +1,4 @@
-form {
-  margin: 20px auto;
-  width: 50%;
-  border: dashed 2px gray;
-  border-radius: 20px;
-  padding: 20px 5px;
-}
-
-input {
-  display: block;
-  width: 90%;
-  padding: 10px;
-  margin: 10px auto;
+body {
+  background: linear-gradient(red, yellow);
+  height: 100vh;
 }
