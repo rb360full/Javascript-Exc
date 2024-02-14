@@ -1,0 +1,4 @@
+target: get all users
+api: https://rbazdaran-js-default-rtdb.firebaseio.com/
+method: get
+response: users
