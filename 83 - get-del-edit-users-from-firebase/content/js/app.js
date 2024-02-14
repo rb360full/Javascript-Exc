@@ -95,3 +95,12 @@ async function updateUser() {
         })
         .catch((err) => console.log(err));
 }
+
+
+document.addEventListener('click', e => {
+
+
+    e.target.parentElement.matches('#edit-modal') ? closeEditModal() : null
+
+
+})
