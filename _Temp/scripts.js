@@ -1,18 +1,16 @@
-let nums = [1, 2, 3, 4, 5, 6, 7, 8]
+class SiteUser extends HTMLElement {
+    constructor() {
+        super();
+        this.innerHTML = `<h1>Hello World</h1>
+        <style>
+         h1 {
+            padding: 10px;
+            color: green;
+            }
+        </style>
+        `
+    }
+}
 
-let filterNums = nums.filter(num => num > 3)
-let mapNums = nums.map(num => {
-    return num * 10
-})
+window.customElements.define('site-user', SiteUser)
 
-
-let reduceNums = nums.reduce((prev, current) => {
-    console.log(prev,current);
-    return prev + current
-})
-
-
-
-// console.log(nums);
-// console.log(filterNums);
-// console.log(mapNums);

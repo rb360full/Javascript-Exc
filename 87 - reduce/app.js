@@ -1,11 +1,21 @@
 
 
-let users = ["ali", "ali", "reza", "akbar", "mohsen", "majid", "reza", "reza"];
+let users = ["ali", "ali", "reza", "akbar", "reza", "mohsen", "majid", "reza"];
 
-let reduceOutput = users.reduce((obj, current) => {
-    console.log({ ...obj, [current]: (obj[current] || 0) + 1 });
+let object = {};
 
-    return { ...obj, [current]: (obj[current] || 0) + 1 };
+let red = users.reduce((obj, current) => {
+    let val = (obj[current] || 0) + 1;
+    object = { ...obj, [current]: val };
+    console.log(object);
+
+    return object;
 }, {});
+
+
+let temp = { name: 'reza' }
+
+console.log({['reza']:temp['reza']});
+
 
 
