@@ -1,42 +1,4 @@
-let template = document.createElement("template");
+import { UserSite } from "./components/user-site/user-site.js"
 
-fetch("site-user.html").then(res => res.text())
-    .then(data =>{ template.innerHTML = data})
+window.customElements.define('site-user', UserSite)
 
-
-class UserSite extends HTMLElement {
-    constructor() {
-        super();
-        this.attachShadow({ mode: "open" });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
-    }
-}
-
-window.customElements.define("site-user", UserSite);
-
-
-
-
-// site-user.js
-// class UserSite extends HTMLElement {
-//     constructor() {
-//         super();
-//         this.attachShadow({ mode: "open" });
-//         this.fetchAndRenderTemplate();
-//     }
-
-//     fetchAndRenderTemplate() {
-//         let template = document.createElement("template");
-//         fetch("site-user.html")
-//             .then(res => res.text())
-//             .then(data => {
-//                 template.innerHTML = data;
-//                 this.shadowRoot.appendChild(template.content.cloneNode(true));
-//             })
-//             .catch(error => {
-//                 console.error('Error:', error);
-//             });
-//     }
-// }
-
-// window.customElements.define("site-user", UserSite);
