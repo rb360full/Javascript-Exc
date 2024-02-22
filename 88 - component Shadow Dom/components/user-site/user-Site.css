@@ -7,5 +7,10 @@ slot[name="email"] {
 slot[name="job"] {
   color: red;
 }
-
+/* slot[class="pc"]{
+  color: blueviolet;
+} */
+slot.pc{
+  color: blueviolet;
+}
 

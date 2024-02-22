@@ -4,6 +4,7 @@ template.innerHTML = `
 <slot name='username'></slot>
 <slot name='email'></slot>
 <slot name='job'></slot>
+<slot class="pc" name='pc'></slot>
 
 <link rel="stylesheet" href="components/user-site/user-Site.css">
 `
