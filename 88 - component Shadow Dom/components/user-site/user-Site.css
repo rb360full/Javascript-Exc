@@ -1,6 +1,11 @@
-h1:nth-child(1){
-    background-color: yellow;
+slot[name="username"] {
+  color: green;
 }
-h1:nth-child(2){
-    background-color: blue;
+slot[name="email"] {
+  color: blue;
 }
+slot[name="job"] {
+  color: red;
+}
+
+

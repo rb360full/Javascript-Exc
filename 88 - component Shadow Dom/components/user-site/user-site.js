@@ -1,10 +1,10 @@
 let template = document.createElement("template");
 
 template.innerHTML = `
-<h1>Reza ❤️❤️</h1>
-<h1>Reza ❤️❤️</h1>
-<h1>Reza ❤️❤️</h1>
-<h1>Reza ❤️❤️</h1>
+<slot name='username'></slot>
+<slot name='email'></slot>
+<slot name='job'></slot>
+
 <link rel="stylesheet" href="components/user-site/user-Site.css">
 `
 
