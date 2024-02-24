@@ -1,0 +1,10 @@
+.header-container {
+  background-color: #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-container .header-title{
+    color: green;
+}
