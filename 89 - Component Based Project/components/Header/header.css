@@ -1,10 +1,20 @@
 .header-container {
-  background-color: #aaa;
+  background-color: #ccc;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .header-container .header-title{
     color: green;
+    display: block;
 }
+.header-container .header-desc{
+    color: green;
+    display: block;
+}
+
+
+
+

@@ -1,5 +1,5 @@
 body{
-    background-color: bisque;
+    background: linear-gradient(green , blue);
     height: 100vh;
     margin: 0;
 }

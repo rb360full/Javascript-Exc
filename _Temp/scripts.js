@@ -1,16 +1,9 @@
-class SiteUser extends HTMLElement {
-    constructor() {
-        super();
-        this.innerHTML = `<h1>Hello World</h1>
-        <style>
-         h1 {
-            padding: 10px;
-            color: green;
-            }
-        </style>
-        `
-    }
-}
+const container = document.querySelector(".container");
 
-window.customElements.define('site-user', SiteUser)
-
+fetch('part.html').then(response=> response.text())
+.then(html=> {
+    container.innerHTML = html
+})
+// container.innerHTML = `
+// <h1>Hello World</h1>
+// `
