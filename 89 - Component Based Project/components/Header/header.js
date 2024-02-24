@@ -4,10 +4,10 @@ class Header extends HTMLElement {
         this.attachShadow({ mode: "open" });
         this.fetchAndApplyTemplate();
     }
-    
+
     fetchAndApplyTemplate() {
         fetch('components/Header/header.html').then(response => response.text())
-        .then(html => {
+            .then(html => {
                 const template = document.createElement("template");
                 template.innerHTML = html;
                 this.shadowRoot.appendChild(template.content.cloneNode(true));
