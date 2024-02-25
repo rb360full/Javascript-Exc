@@ -8,7 +8,29 @@ let now = new Date();
 form.addEventListener("submit", (e) => {
     now.setTime(now.getTime() + 30 * 24 * 60 * 60 * 1000);
     if (checkBox.checked) {
-        document.cookie = `user=${userInput.value};path=/;expires=${now}`;
-        document.cookie = `pass=${passInput.value};path=/;expires=${now}`;
+        setCookie();
     }
 });
+
+window.addEventListener("load", () => {
+    if (getCookie("user") && getCookie("pass")) {
+        alert("Welcome to your Dashboard");
+    }
+});
+
+function setCookie() {
+    now.setTime(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+    document.cookie = `user=${userInput.value};path=/;expires=${now}`;
+    document.cookie = `pass=${passInput.value};path=/;expires=${now}`;
+}
+
+function getCookie(param) {
+    let allCookies = document.cookie.split(";");
+    let user = allCookies.find((cok) => {
+        return cok.includes(param);
+    });
+    return user.split('=')[1]
+    return user.substring(user.indexOf("=") + 1);
+}
+
+ console.log(getCookie('user'));
