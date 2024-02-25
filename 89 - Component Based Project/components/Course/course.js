@@ -14,6 +14,9 @@ class Course extends HTMLElement {
                 this.shadowRoot.appendChild(template.content.cloneNode(true))
                 this.shadowRoot.querySelector('.course-title').innerHTML = this.getAttribute('course-title')
                 this.shadowRoot.querySelector('.course-desc').innerHTML = this.getAttribute('course-desc')
+                this.shadowRoot.querySelector('button').addEventListener('click', e => {
+                    alert('clicked');
+                })
             })
     }
     connectedCallback() {
