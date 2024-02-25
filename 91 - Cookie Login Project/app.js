@@ -12,11 +12,11 @@ form.addEventListener("submit", (e) => {
     }
 });
 
-window.addEventListener("load", () => {
-    if (getCookie("user") && getCookie("pass")) {
-        alert("Welcome to your Dashboard");
-    }
-});
+// window.addEventListener("load", () => {
+//     if (!getCookie("user") || !getCookie("pass")) {
+//         window.location = 'http://localhost/Javascript-Exc/91%20-%20Cookie%20Login%20Project/login.html'
+//     }
+// });
 
 function setCookie() {
     now.setTime(now.getTime() + 30 * 24 * 60 * 60 * 1000);
