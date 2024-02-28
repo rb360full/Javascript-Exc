@@ -1,12 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  background: linear-gradient(red, yellow);
+body{
+  background-color: rgb(7, 14, 21);
   height: 100vh;
+  max-height: 100vh;
 }
-
-
-
