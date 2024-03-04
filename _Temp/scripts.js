@@ -25,3 +25,13 @@ f1(1, 2, 3, 4).then((res) => {
 });
 
 //
+let user = {
+  name:'reza',
+  age:40,
+  loc:'shiraz'
+}
+
+
+console.log('reza');
+
+window
