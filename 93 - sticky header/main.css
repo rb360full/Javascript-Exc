@@ -1,0 +1,23 @@
+.dev_page {
+  margin-top: 50px;
+}
+
+.dev_page_head {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #842323;
+  margin-bottom: 0;
+  height: 50px;
+}
+
+.anchor {
+  position: absolute;
+  top: 0;
+  margin-top: -60px;
+}
+
+h3 {
+  position: relative;
+}
