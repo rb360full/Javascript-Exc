@@ -1,13 +1,41 @@
-.container{
-    display: grid;
-    max-width: 1200px;
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
-    gap: 1rem;
+.container {
+  display: grid;
+  max-width: 1200px;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
+.container div {
+  border: solid 1px black;
+  text-align: center;
+}
 
-.container div{
-    border: solid 1px black;
-    text-align: center;
+.grid-box {
+  display: grid;
+  grid-template-rows: 80px auto 60px;
+  grid-template-areas:
+    "head head head"
+    "sider content content"
+    "footer footer footer";
+  gap: 1rem;
+}
+.header {
+  grid-area: head;
+}
+.sider {
+  grid-area: sider;
+}
+.content {
+  grid-area: content;
+}
+.footer {
+  grid-area: footer;
+}
+
+.grid-box > div {
+  background-color: lightblue;
+  padding: 1rem;
+  border: black 1px solid;
+  border-radius: 5px;
 }
