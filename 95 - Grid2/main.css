@@ -23,8 +23,8 @@
   margin: 50px auto;
   display: flex;
   justify-content: center;
-  max-width: 990px;
   flex-wrap: wrap;
+  /* max-width: 990px; */
 }
 
 .item {
@@ -34,9 +34,15 @@
   align-items: center;
   border: solid 1px black;
   padding: 20px;
-  flex: 1 1 13rem;
+  flex: 1 0 max(25%, 14rem);
 }
 
+
+
+
+
+
+/* 
 @media (min-width: 990px) {
   .item {
     flex: 1 1 18rem;
@@ -46,4 +52,4 @@
   .item {
     flex: 1 1 23rem;
   }
-}
+} */
