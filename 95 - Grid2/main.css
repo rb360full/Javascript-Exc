@@ -36,3 +36,14 @@
   padding: 20px;
   flex: 1 1 13rem;
 }
+
+@media (min-width: 990px) {
+  .item {
+    flex: 1 1 18rem;
+  }
+}
+@media (min-width: 1300px) {
+  .item {
+    flex: 1 1 23rem;
+  }
+}
