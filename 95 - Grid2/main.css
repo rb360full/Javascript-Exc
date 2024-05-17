@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 /* .grid-container {
   margin: 50px auto;
   display: grid;
@@ -36,11 +37,6 @@
   padding: 20px;
   flex: 1 0 max(25%, 14rem);
 }
-
-
-
-
-
 
 /* 
 @media (min-width: 990px) {
