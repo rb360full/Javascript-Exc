@@ -37,7 +37,7 @@ document.getElementById('saveButton').addEventListener('click', async function (
     for (const query of combinedData) {
         const result = await searchGoogle(query);
         searchResults.push(result);
-        console.log(`Query: ${query} - Result: ${result}`);
+        console.log(`Query: ${query} - Results: ${result}`);
     }
 
     saveResultsToExcel(combinedData, searchResults);
@@ -53,18 +53,28 @@ async function searchGoogle(query) {
         const response = await fetch(`https://www.googleapis.com/customsearch/v1?q=${encodeURIComponent(query)}&key=${API_KEY}&cx=${CX}`);
         const data = await response.json();
         console.log('Google API Response:', data);
-        return data.items && data.items.length > 0 ? data.items[0].link : 'No results found';
+        if (data.items && data.items.length > 1) {
+            return [data.items[0].link, data.items[1].link];
+        } else if (data.items && data.items.length > 0) {
+            return [data.items[0].link, 'No second result'];
+        } else {
+            return ['No results found', 'No second result'];
+        }
     } catch (error) {
         console.error('Error fetching from Google API:', error);
-        return 'Error';
+        return ['Error', 'Error'];
     }
 }
 
 function saveResultsToExcel(column1, column2) {
     const newWorkbook = XLSX.utils.book_new();
     const worksheetData = column1.map((item, index) => {
-        const link = column2[index];
-        return link !== 'No results found' && link !== 'Error' ? [item, { f: `HYPERLINK("${link}", "Link")` }] : [item, link];
+        const [link1, link2] = column2[index];
+        return [
+            item, 
+            link1 !== 'No results found' && link1 !== 'Error' ? { f: `HYPERLINK("${link1}", "Link 1")` } : link1,
+            link2 !== 'No second result' && link2 !== 'Error' ? { f: `HYPERLINK("${link2}", "Link 2")` } : link2
+        ];
     });
     const newWorksheet = XLSX.utils.aoa_to_sheet(worksheetData);
     XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, 'نتایج جستجو');
