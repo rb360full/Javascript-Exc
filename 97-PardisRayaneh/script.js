@@ -3,7 +3,7 @@ const CX = '658dacb77c9c045d9';
 
 let combinedData = [];
 let searchResults = [];
-let initialFourthColumn = [];
+let initialFifthColumn = [];
 let originalData = [];
 
 document.getElementById('excelFile').addEventListener('change', function (e) {
@@ -27,10 +27,10 @@ document.getElementById('excelFile').addEventListener('change', function (e) {
             return cell1 + (cell2 ? ' ' + cell2 : '');
         });
 
-        initialFourthColumn = json.map(row => row[3] !== undefined ? row[3] : '');
+        initialFifthColumn = json.map(row => row[4] !== undefined ? row[4] : '');
         originalData = json;
         console.log('Combined Data:', combinedData);
-        console.log('Initial Fourth Column:', initialFourthColumn);
+        console.log('Initial Fifth Column:', initialFifthColumn);
         console.log('Original Data:', originalData);
 
         displayOutput(combinedData);
@@ -46,24 +46,27 @@ document.getElementById('saveButton').addEventListener('click', async function (
 
     searchResults = [];
     for (const [index, query] of combinedData.entries()) {
-        if (initialFourthColumn[index] === 1) {
-            searchResults.push([originalData[index][1], originalData[index][2]]);
+        if (initialFifthColumn[index] === 1) {
+            searchResults.push([originalData[index][1], originalData[index][2], initialFifthColumn[index]]);
             console.log(`Query: ${query} - Result: Using existing links`);
             continue;
         }
 
-        if (!query || initialFourthColumn[index] === 1) {
-            searchResults.push([originalData[index][1], originalData[index][2]]);
+        if (!query || initialFifthColumn[index] === 1) {
+            searchResults.push([originalData[index][1], originalData[index][2], initialFifthColumn[index]]);
             console.log(`Query: ${query} - Result: No search needed`);
             continue;
         }
 
         const result = await searchGoogle(query);
-        searchResults.push(result);
+        if (result[0] !== 'No results found' && result[0] !== 'Error') {
+            initialFifthColumn[index] = 1;
+        }
+        searchResults.push(result.concat(initialFifthColumn[index]));
         console.log(`Query: ${query} - Results: ${result}`);
     }
 
-    saveResultsToExcel(combinedData, searchResults);
+    saveResultsToExcel(originalData, searchResults);
 });
 
 function displayOutput(data) {
@@ -89,17 +92,16 @@ async function searchGoogle(query) {
     }
 }
 
-function saveResultsToExcel(column1, column2) {
+function saveResultsToExcel(originalData, searchResults) {
     const newWorkbook = XLSX.utils.book_new();
-    const worksheetData = column1.map((item, index) => {
-        const [link1, link2] = column2[index];
-        const hasLink = (link1 !== 'No results found' && link1 !== 'Error' && link1 !== 'Empty query') || 
-                        (link2 !== 'No second result' && link2 !== 'Error' && link2 !== 'Empty query');
+    const worksheetData = originalData.map((row, index) => {
+        const [link1, link2, updatedColumn5] = searchResults[index];
         return [
-            item, 
-            link1 !== 'No results found' && link1 !== 'Error' && link1 !== 'Empty query' ? { f: `HYPERLINK("${link1}", "Link 1")` } : link1,
-            link2 !== 'No second result' && link2 !== 'Error' && link2 !== 'Empty query' ? { f: `HYPERLINK("${link2}", "Link 2")` } : link2,
-            hasLink ? 1 : 0
+            row[0], 
+            row[1], 
+            link1 !== 'No results found' && link1 !== 'Error' ? { f: `HYPERLINK("${link1}", "Link 1")` } : link1,
+            link2 !== 'No second result' && link2 !== 'Error' ? { f: `HYPERLINK("${link2}", "Link 2")` } : link2,
+            updatedColumn5
         ];
     });
     const newWorksheet = XLSX.utils.aoa_to_sheet(worksheetData);
