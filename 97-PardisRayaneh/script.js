@@ -25,7 +25,9 @@ document.getElementById('excelFile').addEventListener('change', function (e) {
         combinedData = json.map(row => {
             const cell1 = row[0] || '';
             const cell2 = row[1] || '';
-            return cell1 + (cell2 ? ' ' + cell2 : '');
+            // Extract only English letters and numbers from cell1
+            const englishText = cell1.match(/[a-zA-Z0-9\s]+/g)?.join(' ') || '';
+            return englishText + (cell2 ? ' ' + cell2 : '');
         });
 
         initialFifthColumn = json.map(row => row[4] !== undefined ? row[4] : '');
