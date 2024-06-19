@@ -25,8 +25,8 @@ document.getElementById('excelFile').addEventListener('change', function (e) {
         combinedData = json.map(row => {
             const cell1 = row[0] || '';
             const cell2 = row[1] || '';
-            // Extract only English letters and numbers from cell1
-            const englishText = cell1.match(/[a-zA-Z0-9\s]+/g)?.join(' ') || '';
+            // Extract only English letters, numbers, and dashes not surrounded by spaces from cell1
+            const englishText = cell1.replace(/\s-\s/g, '').match(/[a-zA-Z0-9-]+/g)?.join(' ') || '';
             return englishText + (cell2 ? ' ' + cell2 : '');
         });
 
@@ -52,13 +52,13 @@ document.getElementById('saveButton').addEventListener('click', async function (
     searchResults = [];
     for (const [index, query] of combinedData.entries()) {
         if (initialFifthColumn[index] === 1) {
-            searchResults.push([originalData[index][1], originalData[index][2], initialFifthColumn[index]]);
+            searchResults.push([originalData[index][2], originalData[index][3], initialFifthColumn[index]]);
             console.log(`Query: ${query} - Result: Using existing links`);
             continue;
         }
 
         if (!query || initialFifthColumn[index] === 1) {
-            searchResults.push([originalData[index][1], originalData[index][2], initialFifthColumn[index]]);
+            searchResults.push([originalData[index][2], originalData[index][3], initialFifthColumn[index]]);
             console.log(`Query: ${query} - Result: No search needed`);
             continue;
         }
