@@ -5,6 +5,7 @@ let combinedData = [];
 let searchResults = [];
 let initialFifthColumn = [];
 let originalData = [];
+let originalStyles = [];
 
 document.getElementById('excelFile').addEventListener('change', function (e) {
     const file = e.target.files[0];
@@ -29,11 +30,13 @@ document.getElementById('excelFile').addEventListener('change', function (e) {
 
         initialFifthColumn = json.map(row => row[4] !== undefined ? row[4] : '');
         originalData = json;
+        originalStyles = XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: true });
         console.log('Combined Data:', combinedData);
         console.log('Initial Fifth Column:', initialFifthColumn);
         console.log('Original Data:', originalData);
+        console.log('Original Styles:', originalStyles);
 
-        displayOutput(combinedData);
+        displayOutput(combinedData, initialFifthColumn);
         document.getElementById('saveButton').disabled = false;
     };
     reader.readAsArrayBuffer(file);
@@ -66,12 +69,23 @@ document.getElementById('saveButton').addEventListener('click', async function (
         console.log(`Query: ${query} - Results: ${result}`);
     }
 
-    saveResultsToExcel(originalData, searchResults);
+    saveResultsToExcel(originalData, searchResults, originalStyles);
 });
 
-function displayOutput(data) {
+function displayOutput(data, fifthColumn) {
     const output = document.getElementById('output');
-    output.innerHTML = JSON.stringify(data, null, 2);
+    output.innerHTML = '';
+
+    const list = document.createElement('ul');
+    data.forEach((item, index) => {
+        if (fifthColumn[index] === 0 || fifthColumn[index] === '') {
+            const listItem = document.createElement('li');
+            listItem.textContent = item;
+            list.appendChild(listItem);
+        }
+    });
+
+    output.appendChild(list);
 }
 
 async function searchGoogle(query) {
@@ -92,7 +106,7 @@ async function searchGoogle(query) {
     }
 }
 
-function saveResultsToExcel(originalData, searchResults) {
+function saveResultsToExcel(originalData, searchResults, originalStyles) {
     const newWorkbook = XLSX.utils.book_new();
     const worksheetData = originalData.map((row, index) => {
         const [link1, link2, updatedColumn5] = searchResults[index];
@@ -104,7 +118,18 @@ function saveResultsToExcel(originalData, searchResults) {
             updatedColumn5
         ];
     });
+
     const newWorksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+
+    // Apply original styles
+    for (let R = 0; R < originalStyles.length; R++) {
+        for (let C = 0; C < originalStyles[R].length; C++) {
+            const cellAddress = XLSX.utils.encode_cell({ r: R, c: C });
+            if (!newWorksheet[cellAddress]) continue;
+            newWorksheet[cellAddress].s = originalStyles[R][C] && originalStyles[R][C].s ? originalStyles[R][C].s : {};
+        }
+    }
+
     XLSX.utils.book_append_sheet(newWorkbook, newWorksheet, 'نتایج جستجو');
 
     XLSX.writeFile(newWorkbook, 'SearchResults.xlsx');

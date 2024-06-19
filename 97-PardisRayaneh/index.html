@@ -4,16 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بارگذاری و ذخیره فایل اکسل</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Insert your Excel File</h1>
-        <input type="file" id="excelFile" />
-        <button id="saveButton" disabled>Save to Excel</button>
-        <div id="output"></div>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h1>Insert your Excel File</h1>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <input type="file" class="form-control-file" id="excelFile" />
+                </div>
+                <button id="saveButton" class="btn btn-primary btn-block" disabled>Save to Excel</button>
+                <div id="output" class="mt-3"></div>
+            </div>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
