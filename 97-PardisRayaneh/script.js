@@ -1,5 +1,5 @@
 const API_KEY = 'AIzaSyA6ntSJjcf9Uu5w0-7MBft63mD1HTGeqc4';
-const CX = '658dacb77c9c045d9';
+const CX = '514d0c3a2061a4a17';
 
 let combinedData = [];
 let searchResults = [];
