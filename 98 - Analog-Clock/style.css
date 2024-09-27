@@ -3,6 +3,10 @@
   width: fit-content;
   margin: auto;
 }
+h3 {
+  padding: 0;
+  margin: 0;
+}
 
 .clock-face {
   /* border: 2px solid darkgreen; */
@@ -23,7 +27,6 @@
   transform-origin: left;
   /* animation: rotate 60s linear infinite; */
   animation: rotate 60s steps(60) infinite;
-
 }
 
 @keyframes rotate {
@@ -42,6 +45,9 @@
   font-weight: bold;
 }
 
+h3 {
+  transform: rotate(calc(-1 * var(--rotation)));
+}
 .number-1 {
   --rotation: 30deg;
 }
